@@ -16,6 +16,8 @@ export default {
                 "background-dark": "#230f16",
                 "surface-dark": "#2f151e",
                 "text-dim": "#ce8da3",
+                "ink": "#0f0508",
+                "accent-cyan": "#00ffff",
             },
             fontFamily: {
                 sans: ["Space Grotesk", "Sarasa Gothic", "system-ui", "sans-serif"],
