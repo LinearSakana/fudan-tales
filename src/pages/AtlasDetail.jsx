@@ -96,7 +96,7 @@ export default function AtlasDetail() {
                     </button>
 
                     <h1
-                        className="header-title text-base font-extra glitch-text"
+                        className="header-title text-lg tracking-widest font-extra glitch-text"
                         data-text={archiveNo}
                         title={entity.code}
                     >
