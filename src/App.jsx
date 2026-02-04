@@ -15,7 +15,7 @@ export default function App() {
 
             // 获取系统的导航栏高度并设置页面底部内边距
             const navBarHeight = await StatusBar.getHeight();
-            document.body.style.paddingBottom = `${navBarHeight + 500}px`;
+            document.body.style.paddingBottom = `${navBarHeight + 50}px`;
         };
 
         hideSystemNavBar();
