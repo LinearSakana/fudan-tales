@@ -2,7 +2,7 @@ export const currentUser = {
     name: "DREAMER-049",
     id: "049",
     alias: "CHRONO_WATCHER",
-    department: "大数据学院 · 异常行为观测科",
+    department: "???学院 · 异常行为观测科",
     level: 18,
     sanity: 82,
     totalSyncHours: 142.5,
