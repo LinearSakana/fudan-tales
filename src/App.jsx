@@ -9,11 +9,16 @@ import SleepMonitor from "./pages/SleepMonitor"
 export default function App() {
     useEffect(() => {
         const hideSystemNavBar = async () => {
+            // 设置 StatusBar 的样式
             await StatusBar.setOverlaysWebView({overlay: true});
             await StatusBar.setStyle({style: 'DARK'});
+
+            // 获取系统的导航栏高度并设置页面底部内边距
+            const navBarHeight = await StatusBar.getHeight();
+            document.body.style.paddingBottom = `${navBarHeight + 500}px`;
         };
 
-        hideSystemNavBar(); // 隐藏导航栏
+        hideSystemNavBar();
     }, []);
     return (
         <Routes>
