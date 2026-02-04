@@ -90,14 +90,14 @@
     .glitch-text::before {
         left: 2px;
         text-shadow: -1px 0 theme('colors.primary');
-        clip: rect(24px, 550px, 90px, 0);
+        clip-path: inset(10% 0 30% 0);
         animation: glitch-anim-2 3s infinite linear alternate-reverse;
     }
 
     .glitch-text::after {
         left: -2px;
         text-shadow: -1px 0 theme('colors.accent-cyan');
-        clip: rect(85px, 550px, 140px, 0);
+        clip-path: inset(40% 0 10% 0);
         animation: glitch-anim 2.5s infinite linear alternate-reverse;
     }
 
@@ -346,25 +346,25 @@
 
 @keyframes glitch-anim {
     0% {
-        clip: rect(14px, 9999px, 122px, 0);
+        clip-path: inset(14px, 9999px, 122px, 0);
     }
     5% {
-        clip: rect(78px, 9999px, 86px, 0);
+        clip-path: inset(78px, 9999px, 86px, 0);
     }
     100% {
-        clip: rect(35px, 9999px, 148px, 0);
+        clip-path: inset(35px, 9999px, 148px, 0);
     }
 }
 
 @keyframes glitch-anim-2 {
     0% {
-        clip: rect(107px, 9999px, 15px, 0);
+        clip-path: inset(107px, 9999px, 15px, 0);
     }
     5% {
-        clip: rect(4px, 9999px, 78px, 0);
+        clip-path: inset(4px, 9999px, 78px, 0);
     }
     100% {
-        clip: rect(138px, 9999px, 66px, 0);
+        clip-path: inset(138px, 9999px, 66px, 0);
     }
 }
 
