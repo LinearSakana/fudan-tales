@@ -1,11 +1,8 @@
-import {useNavigate} from "react-router-dom";
 import BottomNav from "../components/ui/BottomNav.jsx";
 import {useEffect} from "react";
 import LayoutEffects from "../components/layout/LayoutEffects";
 
 export default function SleepMonitor() {
-    const navigate = useNavigate();
-
     // 页面初始化：设置标题，保持原始风格的页面标题
     useEffect(() => {
         document.title = "睡眠校准监控 中文版";
