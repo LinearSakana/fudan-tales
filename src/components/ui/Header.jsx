@@ -4,16 +4,18 @@ export default function Header({
                                    title = "?",
                                    subtitle = "?",
                                    icon = "arrow_back",
-                                   iconText = "?",
+                                   iconText = "返回",
                                    additionalClass = "",
                                    rightText = "",
+                                   onIconClick,
                                }) {
     const navigate = useNavigate();
+    onIconClick = () => navigate(-1);
     return (
         <header
             className="header-bar header-bar-muted sticky top-0 p-2 z-20 ml-1 gap-3">
             <button
-                onClick={() => navigate(-1)}
+                onClick={() => onIconClick()}
                 className="btn-base btn-ghost w-20 h-10"
             >
                 <span className="font-icon text-xl">{icon}</span>

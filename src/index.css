@@ -371,18 +371,6 @@
     }
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.8;
-    }
-}
-
 /* 自定义滚动条 (Webkit) */
 ::-webkit-scrollbar {
     width: 4px;

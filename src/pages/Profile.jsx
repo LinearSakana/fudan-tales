@@ -58,11 +58,6 @@ export default function Profile() {
             {/* --- Header: ID CARD --- */}
             <header
                 className={`relative z-10 p-5 pt-8 transition-all duration-300 ${booted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
-                {/* 新增：绝对定位的设置按钮 */}
-                <button onClick={() => navigate('/settings')}
-                        className="absolute top-6 right-6 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 border border-white/10 text-white/50 hover:text-primary hover:border-primary transition-all active:scale-90">
-                    <span className="font-icon text-lg">settings</span>
-                </button>
                 <div className="glass-card rounded-xl p-5 border-l-4 border-l-primary overflow-hidden relative group">
                     {/* 装饰大字背景 */}
                     <div
@@ -95,9 +90,15 @@ export default function Profile() {
 
                             <div className="pt-2 border-t border-dashed border-white/10 mt-2">
                                 <p className="text-xxs text-text-dim">{currentUser.department}</p>
-                                <div className="flex items-center gap-2 mt-1">
-                                    <span className="badge badge-muted">Lv.{currentUser.level}</span>
-                                    <span className="badge badge-primary">CLASS-B</span>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <span className="badge badge-muted">Lv.{currentUser.level}</span>
+                                        <span className="badge badge-primary">CLASS-B</span>
+                                    </div>
+                                    <button onClick={() => navigate('/settings')}
+                                            className="relative bottom-2 z-20 w-10 h-10 rounded-full bg-black/40 border border-white/10 text-white/50 hover:text-primary hover:border-primary transition-all active:scale-90">
+                                        <span className="font-icon text-lg">settings</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +136,7 @@ export default function Profile() {
                                  className="glass-card relative p-3 rounded border border-white/5 flex flex-col justify-between overflow-hidden card-hover-glow group">
                                 <div className="absolute inset-0 effect-scanlines-soft"/>
                                 <div
-                                    className="relative z-10 text-nano text-text-dim font-bold tracking-wider flex flex-col leading-tight">
+                                    className="relative z-10 text-xxs text-text-dim font-bold tracking-wider flex flex-col leading-tight">
                                     <span>{item.cn}</span>
                                     <span className="scale-75 origin-top-left opacity-50">// {item.en}</span>
                                 </div>
