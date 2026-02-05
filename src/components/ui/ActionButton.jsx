@@ -4,8 +4,8 @@ export default function ActionButton({
                                          icon,
                                          onClick,
                                          disabled = false,
-                                         iconSize = "8xl",
-                                         iconPosition = "4"
+                                         iconSize = "text-7xl",
+                                         iconPosition = "-top-2 -right-2",
                                      }) {
     return (
         <button
@@ -16,14 +16,11 @@ export default function ActionButton({
                 border bg-black/40 backdrop-blur-md rounded-lg transition-all duration-300 group overflow-hidden
                 ${disabled
                 ? 'border-white/5 opacity-50 cursor-not-allowed'
-                : 'border-white/10 hover:border-primary/50 hover:bg-white/5 active:scale-95 cursor-pointer'
-            }
-            `}
-        >
+                : 'border-white/10 hover:border-primary/50 hover:bg-white/5 active:scale-95 cursor-pointer'}`}>
             {/* 装饰背景 (右漂浮大图标) */}
             <div
-                className={`absolute -right-${iconPosition} -top-${iconPosition} opacity-20 group-hover:opacity-80 transition-opacity pointer-events-none`}>
-                <span className={`font-icon text-${iconSize}`}>{icon}</span>
+                className={`absolute ${iconPosition} opacity-20 group-hover:opacity-80 transition-opacity pointer-events-none`}>
+                <span className={`font-icon ${iconSize}`}>{icon}</span>
             </div>
 
             {/* 顶部标签 (Sub 属性作为技术代码) */}

@@ -101,8 +101,10 @@ export default function Settings() {
                         />
 
                         <div className="pt-4 border-t border-dashed border-white/10 grid grid-cols-2 gap-3">
-                            <ActionButton label="PURGE CACHE" sub="清除本地缓存" icon="delete_sweep"/>
-                            <ActionButton label="RE-CALIBRATE" sub="神经校准" icon="tune"/>
+                            <ActionButton label="清除本地缓存" sub="PURGE CACHE" icon="delete_sweep" iconSize="text-6xl"
+                                          iconPosition="-top-0 -right-0"/>
+                            <ActionButton label="神经校准" sub="RE-CALIBRATE" icon="tune" iconSize="text-6xl"
+                                          iconPosition="-top-0 -right-0"/>
                         </div>
                     </div>
                 </section>
