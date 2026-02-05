@@ -8,12 +8,10 @@ export default function BottomNav({activeKey = "atlas", onNavigate}) {
 
     return (
         <nav
-            className="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/85 backdrop-blur-md border-t border-white/10 px-6 py-3 flex justify-between items-center pb-8">
+            className="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/85 backdrop-blur-md border-t border-white/10 px-6 py-3 flex justify-between items-center pb-10">
+            {/*TODO: Fix layout issue with BottomNav and system navigation bar*/}
             {items.map((it) => {
                 const active = it.key === activeKey;
-
-                // [修改] 移除 && it.key === "atlas" 的限制
-                // 只要是当前选中的项 (active)，就应用这个带有顶部发光条的样式
                 if (active) {
                     return (
                         <button
