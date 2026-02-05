@@ -112,8 +112,8 @@ export default function Home() {
                                 icon={action.icon}
                                 label={action.label}
                                 sub={action.sub}
-                                // 这里可以添加点击事件跳转
                                 onClick={() => action.sub === 'ATLAS' && navigate('/atlas')}
+                                disabled={idx === 2} // 示例：禁用第三个按钮
                             />
                         ))}
                     </div>
