@@ -85,7 +85,8 @@ export default function Profile() {
                                     <h1 className="text-2xl font-display font-bold tracking-wider">{currentUser.name}</h1>
                                     <p className="text-[10px] text-primary font-bold tracking-[-0.02em]">{currentUser.alias}</p>
                                 </div>
-                                <span className="font-icon text-white/20 text-3xl">fingerprint</span>
+                                <span className="font-icon text-white/20 text-3xl pr-4 pl-4 pb-2.5 pt-2"
+                                      onClick={() => navigate("/settings")}>fingerprint</span>
                             </div>
 
                             <div className="pt-2 border-t border-dashed border-white/10 mt-2">
@@ -95,10 +96,6 @@ export default function Profile() {
                                         <span className="badge badge-muted">Lv.{currentUser.level}</span>
                                         <span className="badge badge-primary">CLASS-B</span>
                                     </div>
-                                    <button onClick={() => navigate('/settings')}
-                                            className="relative bottom-2 z-20 w-10 h-10 rounded-full bg-black/40 border border-white/10 text-white/50 hover:text-primary hover:border-primary transition-all active:scale-90">
-                                        <span className="font-icon text-lg">settings</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
