@@ -27,7 +27,7 @@ export default function Atlas() {
             <LayoutEffects noise="strong" scanlines glow vignette/>
 
             <AtlasHeader
-                title="ARCHIVE OF ANOMALIES"
+                title="异闻图鉴 ARCHIVE OF ANOMALIES"
                 subtitle="系统状态：在线"
                 schoolName="复旦大学"
                 zones={zones}

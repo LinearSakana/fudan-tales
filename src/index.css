@@ -123,7 +123,7 @@
 
     /* Header / TopBar */
     .header-bar {
-        @apply flex items-center justify-between border-b border-white/10 bg-black/80 backdrop-blur-sm;
+        @apply flex items-center border-b border-white/10 bg-black/80 backdrop-blur-sm;
     }
 
     .header-bar-muted {
@@ -131,7 +131,7 @@
     }
 
     .header-title {
-        @apply text-white font-display tracking-tight;
+        @apply text-white font-display;
     }
 
     .header-subtitle {
@@ -203,7 +203,7 @@
     }
 
     .btn-primary {
-        @apply bg-primary/20 border border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl;
+        @apply bg-primary/20 border border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl active:scale-95;
     }
 
     .btn-secondary {
@@ -211,7 +211,7 @@
     }
 
     .btn-ghost {
-        @apply bg-transparent border border-white/10 text-white/80 hover:text-white;
+        @apply bg-transparent border border-white/10 text-white/80 hover:text-white rounded-xl;
     }
 }
 

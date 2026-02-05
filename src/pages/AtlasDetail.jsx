@@ -85,10 +85,11 @@ export default function AtlasDetail() {
                 <LayoutEffects noise="soft" grid/>
 
                 {/* Header */}
-                <header className="header-bar sticky top-0 z-50 p-4 pb-2 border-[#361721] bg-[#1a0b10]/90">
+                <header
+                    className="header-bar sticky top-0 z-50 p-4 pb-2 border-[#361721] bg-primary/10 backdrop-blur-sm flex items-center justify-between gap-4">
                     <button
                         type="button"
-                        onClick={() => navigate("/atlas")}
+                        onClick={() => navigate(-1)}
                         className="flex items-center gap-2 text-white/70"
                     >
                         <span className="font-icon text-xl">arrow_back</span>

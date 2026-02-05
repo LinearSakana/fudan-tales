@@ -5,6 +5,7 @@ import Atlas from "./pages/Atlas"
 import AtlasDetail from "./pages/AtlasDetail"
 import Profile from "./pages/Profile"
 import SleepMonitor from "./pages/SleepMonitor"
+import Settings from "./pages/Settings.jsx";
 
 export default function App() {
     useEffect(() => {
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/atlas/:code" element={<AtlasDetail/>}/>
             <Route path="/sleep" element={<SleepMonitor/>}/>
             <Route path="/me" element={<Profile/>}/>
+            <Route path="/settings" element={<Settings/>}/>
         </Routes>
     );
 }

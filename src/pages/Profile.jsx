@@ -4,7 +4,7 @@ import BottomNav from "../components/ui/BottomNav.jsx";
 import EngramList from "../components/EngramList";
 import EngramModal from "../components/EngramModal";
 import BilingualText from "../components/ui/BilingualText";
-import {currentUser, syncLog, engrams} from "../data/user-data.js";
+import {currentUser, engrams, syncLog} from "../data/user-data.js";
 import LayoutEffects from "../components/layout/LayoutEffects";
 
 export default function Profile() {
@@ -58,6 +58,11 @@ export default function Profile() {
             {/* --- Header: ID CARD --- */}
             <header
                 className={`relative z-10 p-5 pt-8 transition-all duration-300 ${booted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
+                {/* 新增：绝对定位的设置按钮 */}
+                <button onClick={() => navigate('/settings')}
+                        className="absolute top-6 right-6 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-black/50 border border-white/10 text-white/50 hover:text-primary hover:border-primary transition-all active:scale-90">
+                    <span className="font-icon text-lg">settings</span>
+                </button>
                 <div className="glass-card rounded-xl p-5 border-l-4 border-l-primary overflow-hidden relative group">
                     {/* 装饰大字背景 */}
                     <div
