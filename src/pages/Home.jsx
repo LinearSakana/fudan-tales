@@ -19,20 +19,29 @@ export default function Home() {
     // --- State Management ---
     const [booted, setBooted] = useState(false);
     const [noiseLevel, setNoiseLevel] = useState(15); // 现实调频器数值
-    const [syncProgress, setSyncProgress] = useState(currentUser?.stats?.stability?.val || 64); // 模拟初始同步值
+    const [syncProgress, setSyncProgress] = useState(0); // 模拟初始同步值
 
     // --- Effects ---
     useEffect(() => {
         document.title = "控制台 | COMMAND";
         // 开场动画延迟
-        const timer = setTimeout(() => setBooted(true), 100);
+        const timer = setTimeout(() => {
+            setBooted(true);
+            setSyncProgress(Number(currentUser?.stats?.efficiency?.val || 64))
+        }, 100);
         return () => clearTimeout(timer);
     }, []);
 
     // 模拟点击同步按钮
     const handleSync = () => {
         if (syncProgress < 100) {
-            setSyncProgress(prev => Math.min(100, prev + 10));
+            setSyncProgress(prev => {
+                // 生成 3 到 12 之间的随机随机浮点数
+                const randomStep = Math.random() * (12 - 3) + 3;
+                const nextValue = prev + randomStep;
+                // 不超过 100
+                return Math.min(100, nextValue);
+            });
         }
     };
 
@@ -84,10 +93,8 @@ export default function Home() {
                 {/* --- Section 1: Hero / Daily Sync --- */}
                 {/* 融合点：使用 Circadian Dial 展示 User 的 Daily Mission 状态 */}
                 <section
-                    onClick={handleSync}
-                    className={`transition-all duration-700 delay-100 ${booted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-                >
-                    <CircadianDial progress={syncProgress}/>
+                    className={`transition-all duration-700 delay-100 ${booted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                    <CircadianDial progress={syncProgress} onSync={handleSync}/>
 
                     {/* 辅助操作提示 */}
                     <div className="text-center -mt-4 mb-6">

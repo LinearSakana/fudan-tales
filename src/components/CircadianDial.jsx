@@ -1,7 +1,7 @@
 import React from 'react';
 
 // props.progress: 0-100 (每日同步进度)
-const CircadianDial = ({progress = 0}) => {
+const CircadianDial = ({progress = 0, onSync = null}) => {
     return (
         <div className="relative w-56 h-56 mx-auto flex items-center justify-center my-4 group select-none">
             {/* 1. 外部刻度环 (慢速旋转) */}
@@ -9,10 +9,12 @@ const CircadianDial = ({progress = 0}) => {
                 className="absolute inset-0 border border-dashed border-white/10 rounded-full animate-spin-slow opacity-30"/>
 
             {/* 2. 进度环 (根据任务完成度显示) */}
-            <svg className="absolute inset-0 w-full h-full -rotate-90 p-2">
-                <circle cx="50%" cy="50%" r="46%" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="2"/>
+            <svg
+                className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+                viewBox="0, 0, 100, 100">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="2"/>
                 <circle
-                    cx="50%" cy="50%" r="46%" fill="none"
+                    cx="50" cy="50" r="46" fill="none"
                     stroke="#ff0055" strokeWidth="2"
                     strokeDasharray="289" // 2 * PI * r(approx 46%)
                     strokeDashoffset={289 - (289 * progress) / 100}
@@ -27,13 +29,14 @@ const CircadianDial = ({progress = 0}) => {
 
             {/* 4. 核心交互区 (点击进行同步) */}
             <div
-                className="relative z-10 text-center flex flex-col items-center justify-center bg-background-dark/80 backdrop-blur-xl w-32 h-32 rounded-full border border-white/10 shadow-[0_0_30px_rgba(255,0,85,0.05)] group-hover:shadow-[0_0_50px_rgba(255,0,85,0.2)] transition-all cursor-pointer overflow-hidden">
+                onClick={onSync}
+                className="relative z-10 text-center flex flex-col items-center justify-center bg-background-dark/80 backdrop-blur-xl w-32 h-32 rounded-full border border-white/10 shadow-[0_0_30px_rgba(255,0,85,0.05)] group-hover:shadow-[0_0_50px_rgba(255,0,85,0.2)] transition-all cursor-pointer active:scale-95 overflow-hidden">
                 {/* 扫描线 */}
                 <div className="absolute inset-0 bg-scanlines opacity-20 pointer-events-none"/>
 
                 <span className="text-[9px] text-text-dim tracking-widest mb-1">SYNC STATUS</span>
                 <span className="text-3xl font-display font-bold text-white text-glow">
-                    {progress}%
+                    {Number(progress).toFixed(1)}%
                 </span>
 
                 {/* 状态指示灯 */}
