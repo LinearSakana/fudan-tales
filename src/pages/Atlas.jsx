@@ -75,17 +75,7 @@ export default function Atlas() {
                     </button>
                 </div>
             </main>
-            <BottomNav
-                activeKey="atlas"
-                onNavigate={(key) => {
-                    // 你已有路由的话可以在这里跳转
-                    // 例子：
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "me") navigate("/me");
-                    if (key === "sleep") navigate("/sleep");
-                    // if (key === "home") navigate("/");
-                }}
-            />
+            <BottomNav activeKey="atlas"/>
         </div>
     );
 }

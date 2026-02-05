@@ -191,16 +191,8 @@ export default function Home() {
             </main>
 
             {/* --- Footer Fixed Area --- */}
-            {/* 融合点：Ticker 放在 Nav 上方 */}
             <BroadcastTicker messages={broadcastMessages}/>
-            <BottomNav
-                activeKey="home"
-                onNavigate={(key) => {
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "me") navigate("/me");
-                    // 实际路由跳转...
-                }}
-            />
+            <BottomNav activeKey="home"/>
         </div>
     );
 }

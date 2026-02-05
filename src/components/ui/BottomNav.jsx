@@ -1,11 +1,21 @@
-export default function BottomNav({activeKey = "atlas", onNavigate}) {
+import {useNavigate} from "react-router-dom";
+
+export default function BottomNav({
+                                      activeKey = "home",
+                                      onNavigate = (key, navigate) => {
+                                          if (key === "home") navigate("/");
+                                          if (key === "atlas") navigate("/atlas");
+                                          if (key === "sleep") navigate("/sleep");
+                                          if (key === "me") navigate("/me");
+                                      }
+                                  }) {
     const items = [
         {key: "home", icon: "home_app_logo", label: "首页"},
         {key: "atlas", icon: "grid_view", label: "图鉴"},
         {key: "sleep", icon: "bedtime", label: "睡眠"},
         {key: "me", icon: "person", label: "个人"},
     ];
-
+    const navigate = useNavigate();
     return (
         <nav
             className="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/85 backdrop-blur-md border-t border-white/10 px-6 py-3 flex justify-between items-center pb-10">
@@ -17,7 +27,7 @@ export default function BottomNav({activeKey = "atlas", onNavigate}) {
                         <button
                             key={it.key}
                             type="button"
-                            onClick={() => onNavigate?.(it.key)}
+                            onClick={() => onNavigate?.(it.key, navigate)}
                             className="flex flex-col items-center gap-1 text-primary relative group"
                         >
                             {/* 顶部发光指示条 */}
@@ -34,7 +44,7 @@ export default function BottomNav({activeKey = "atlas", onNavigate}) {
                     <button
                         key={it.key}
                         type="button"
-                        onClick={() => onNavigate?.(it.key)}
+                        onClick={() => onNavigate?.(it.key, navigate)}
                         className={[
                             "flex flex-col items-center gap-1 group relative",
                             "text-text-dim hover:text-white", // 移除了 active ? "text-primary" 的判断，因为 active 已经在上面处理了

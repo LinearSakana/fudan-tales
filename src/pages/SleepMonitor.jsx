@@ -150,20 +150,9 @@ export default function SleepMonitor() {
                     <div className="h-6"></div>
                 </div>
             </div>
-
-            <BottomNav
-                activeKey="sleep"
-                onNavigate={(key) => {
-                    // if (key === "home") navigate("/");
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "sleep") navigate("/sleep");
-                    if (key === "me") navigate("/me");
-                }}
-            />
-
+            <BottomNav activeKey="sleep"/>
             <div
-                className="pointer-events-none absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]"
-            />
+                className="pointer-events-none absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]"/>
         </div>
     );
 }

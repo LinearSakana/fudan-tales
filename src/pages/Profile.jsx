@@ -232,16 +232,7 @@ export default function Profile() {
 
                 <div className="h-4"/>
             </main>
-
-            <BottomNav
-                activeKey="me"
-                onNavigate={(key) => {
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "me") navigate("/me");
-                    if (key === "sleep") navigate("/sleep");
-                    // 实际项目中应添加其他路由
-                }}
-            />
+            <BottomNav activeKey="me"/>
         </div>
     );
 }
