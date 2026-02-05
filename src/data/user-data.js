@@ -2,12 +2,12 @@ export const currentUser = {
     name: "DREAMER-049",
     id: "049",
     alias: "CHRONO_WATCHER",
-    department: "大数据学院 · 异常行为观测科",
+    department: "???学院 · 异常行为观测科",
     level: 18,
     sanity: 82,
     totalSyncHours: 142.5,
     stats: {
-        efficiency: {val: "94.2%", trend: "+1.2%", status: "opt"}, // 神经效能
+        efficiency: {val: "34.2", trend: "+1.2%", status: "opt"}, // 神经效能
         stability: {val: "CLASS-A", trend: "STABLE", status: "norm"}, // 波形稳定性
         latency: {val: "12ms", trend: "-4ms", status: "opt"},     // 延迟
         coherence: {val: "88%", trend: "WARN", status: "warn"}    // REM 一致性

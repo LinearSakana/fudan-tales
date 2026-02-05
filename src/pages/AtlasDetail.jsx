@@ -1,9 +1,10 @@
-import {detailsByCode, defaultDetail} from "../data/card-details";
+import {defaultDetail, detailsByCode} from "../data/card-details";
 import {cards} from "../data/cards";
 import BilingualText from "../components/ui/BilingualText";
 import {useEffect, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import LayoutEffects from "../components/layout/LayoutEffects";
+import Header from "../components/ui/Header";
 
 
 function clamp01(x) {
@@ -83,31 +84,12 @@ export default function AtlasDetail() {
             className="bg-background-light dark:bg-background-dark min-h-screen font-display antialiased overflow-x-hidden">
             <div className="layout-page layout-frame-light shadow-2xl border-x border-gray-800">
                 <LayoutEffects noise="soft" grid/>
-
-                {/* Header */}
-                <header className="header-bar sticky top-0 z-50 p-4 pb-2 border-[#361721] bg-[#1a0b10]/90">
-                    <button
-                        type="button"
-                        onClick={() => navigate("/atlas")}
-                        className="flex items-center gap-2 text-white/70"
-                    >
-                        <span className="font-icon text-xl">arrow_back</span>
-                        <span className="text-xs tracking-widest uppercase">返回</span>
-                    </button>
-
-                    <h1
-                        className="header-title text-base font-extra glitch-text"
-                        data-text={archiveNo}
-                        title={entity.code}
-                    >
-                        {archiveNo}
-                    </h1>
-
-                    <div className="flex items-center gap-2 text-primary">
-                        <span className="animate-pulse w-2 h-2 rounded-full bg-primary"/>
-                        <span className="text-xs font-mono">{detail.connectionText}</span>
-                    </div>
-                </header>
+                <Header
+                    title={entity.title}
+                    subtitle={archiveNo}
+                    additionalClass={"glitch-text tracking-wide"}
+                    rightText={detail.connectionText}
+                />
 
                 <main className="flex-1 flex flex-col p-4 gap-6 relative z-10">
                     {/* Progress */}

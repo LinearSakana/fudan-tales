@@ -27,7 +27,7 @@ export default function Atlas() {
             <LayoutEffects noise="strong" scanlines glow vignette/>
 
             <AtlasHeader
-                title="ARCHIVE OF ANOMALIES"
+                title="异闻图鉴 ARCHIVE OF ANOMALIES"
                 subtitle="系统状态：在线"
                 schoolName="复旦大学"
                 zones={zones}
@@ -75,17 +75,7 @@ export default function Atlas() {
                     </button>
                 </div>
             </main>
-            <BottomNav
-                activeKey="atlas"
-                onNavigate={(key) => {
-                    // 你已有路由的话可以在这里跳转
-                    // 例子：
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "me") navigate("/me");
-                    if (key === "sleep") navigate("/sleep");
-                    // if (key === "home") navigate("/");
-                }}
-            />
+            <BottomNav activeKey="atlas"/>
         </div>
     );
 }

@@ -88,17 +88,17 @@
     }
 
     .glitch-text::before {
-        left: 2px;
+        left: 1px;
         text-shadow: -1px 0 theme('colors.primary');
-        clip: rect(24px, 550px, 90px, 0);
-        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        clip-path: inset(10% 0 30% 0);
+        animation: glitch-anim-2 1100ms infinite steps(4) alternate-reverse;
     }
 
     .glitch-text::after {
-        left: -2px;
-        text-shadow: -1px 0 theme('colors.accent-cyan');
-        clip: rect(85px, 550px, 140px, 0);
-        animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        left: -0.4px;
+        text-shadow: -1px 0 color-mix(in srgb, theme('colors.accent-cyan'), transparent 50%);
+        clip-path: inset(40% 0 10% 0);
+        animation: glitch-anim 1400ms infinite steps(3) alternate-reverse;
     }
 
     /* 噪点印章边框 (装饰性容器) */
@@ -123,7 +123,7 @@
 
     /* Header / TopBar */
     .header-bar {
-        @apply flex items-center justify-between border-b border-white/10 bg-black/80 backdrop-blur-sm;
+        @apply flex items-center border-b border-white/10 bg-black/80 backdrop-blur-sm;
     }
 
     .header-bar-muted {
@@ -131,7 +131,7 @@
     }
 
     .header-title {
-        @apply text-white font-display tracking-tight;
+        @apply text-white font-display;
     }
 
     .header-subtitle {
@@ -203,7 +203,7 @@
     }
 
     .btn-primary {
-        @apply bg-primary/20 border border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl;
+        @apply bg-primary/20 border border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl active:scale-95;
     }
 
     .btn-secondary {
@@ -211,7 +211,23 @@
     }
 
     .btn-ghost {
-        @apply bg-transparent border border-white/10 text-white/80 hover:text-white;
+        @apply bg-transparent border border-white/10 text-white/80 hover:text-white rounded-xl;
+    }
+
+    /* Cyberpunk Range Slider */
+    .cyber-range {
+        -webkit-appearance: none;
+        @apply w-full h-2 bg-white/10 rounded-full outline-none;
+    }
+
+    .cyber-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        @apply w-6 h-6 rounded-none bg-primary border-2 border-white cursor-pointer shadow-[0_0_10px_#ff0055] transition-transform duration-200;
+        clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+    }
+
+    .cyber-range::-webkit-slider-thumb:hover {
+        @apply scale-110;
     }
 }
 
@@ -265,19 +281,6 @@
         background: color-mix(in srgb, theme('colors.ink') 60%, transparent);
     }
 
-    /* Modal 进入动画 (通用) */
-    @keyframes modal-scan-in {
-        0% {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-            clip-path: inset(0 0 100% 0);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            clip-path: inset(0 0 0 0);
-        }
-    }
     .animate-modal-entry {
         animation: modal-scan-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     }
@@ -295,7 +298,8 @@
     }
 
     .effect-scanlines {
-        @apply pointer-events-none z-0 bg-scanlines opacity-10;
+        @apply pointer-events-none z-0 bg-scanlines opacity-20;
+        animation: pulse 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
     }
 
     .effect-glow {
@@ -318,6 +322,7 @@
     /* Effects Utilities (统一复用) */
     .effect-scanlines-soft {
         @apply pointer-events-none bg-scanlines opacity-10;
+        animation: pulse 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
     }
 
     .effect-noise-soft {
@@ -344,27 +349,41 @@
     }
 }
 
-@keyframes glitch-anim {
+/* Modal 进入动画 (通用) */
+@keyframes modal-scan-in {
     0% {
-        clip: rect(14px, 9999px, 122px, 0);
-    }
-    5% {
-        clip: rect(78px, 9999px, 86px, 0);
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        clip-path: inset(0 0 100% 0);
     }
     100% {
-        clip: rect(35px, 9999px, 148px, 0);
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip-path: inset(0% 0 0% 0);
+    }
+    60% {
+        clip-path: inset(50% 10% 50% 0);
+    }
+    100% {
+        clip-path: inset(0% 0 0% 0);
     }
 }
 
 @keyframes glitch-anim-2 {
     0% {
-        clip: rect(107px, 9999px, 15px, 0);
+        clip-path: inset(10% 0 20% 0);
     }
-    5% {
-        clip: rect(4px, 9999px, 78px, 0);
+    40% {
+        clip-path: inset(40% 0 10% 10%);
     }
     100% {
-        clip: rect(138px, 9999px, 66px, 0);
+        clip-path: inset(20% 0 30% 0);
     }
 }
 

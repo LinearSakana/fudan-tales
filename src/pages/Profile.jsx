@@ -4,7 +4,7 @@ import BottomNav from "../components/ui/BottomNav.jsx";
 import EngramList from "../components/EngramList";
 import EngramModal from "../components/EngramModal";
 import BilingualText from "../components/ui/BilingualText";
-import {currentUser, syncLog, engrams} from "../data/user-data.js";
+import {currentUser, engrams, syncLog} from "../data/user-data.js";
 import LayoutEffects from "../components/layout/LayoutEffects";
 
 export default function Profile() {
@@ -43,7 +43,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="layout-page layout-frame font-mono text-white selection:bg-primary selection:text-white">
+        <div className="layout-page layout-frame font-mono text-white">
 
             {/* --- 全局模态框 (Portal/Overlay) --- */}
             {/* 当 selectedEngram 存在时，Modal 会渲染并覆盖在页面上方 */}
@@ -85,14 +85,17 @@ export default function Profile() {
                                     <h1 className="text-2xl font-display font-bold tracking-wider">{currentUser.name}</h1>
                                     <p className="text-[10px] text-primary font-bold tracking-[-0.02em]">{currentUser.alias}</p>
                                 </div>
-                                <span className="font-icon text-white/20 text-3xl">fingerprint</span>
+                                <span className="font-icon text-white/20 text-3xl pr-4 pl-4 pb-2.5 pt-2"
+                                      onClick={() => navigate("/settings")}>fingerprint</span>
                             </div>
 
                             <div className="pt-2 border-t border-dashed border-white/10 mt-2">
                                 <p className="text-xxs text-text-dim">{currentUser.department}</p>
-                                <div className="flex items-center gap-2 mt-1">
-                                    <span className="badge badge-muted">Lv.{currentUser.level}</span>
-                                    <span className="badge badge-primary">CLASS-B</span>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <span className="badge badge-muted">Lv.{currentUser.level}</span>
+                                        <span className="badge badge-primary">CLASS-B</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +133,7 @@ export default function Profile() {
                                  className="glass-card relative p-3 rounded border border-white/5 flex flex-col justify-between overflow-hidden card-hover-glow group">
                                 <div className="absolute inset-0 effect-scanlines-soft"/>
                                 <div
-                                    className="relative z-10 text-nano text-text-dim font-bold tracking-wider flex flex-col leading-tight">
+                                    className="relative z-10 text-xxs text-text-dim font-bold tracking-wider flex flex-col leading-tight">
                                     <span>{item.cn}</span>
                                     <span className="scale-75 origin-top-left opacity-50">// {item.en}</span>
                                 </div>
@@ -226,16 +229,7 @@ export default function Profile() {
 
                 <div className="h-4"/>
             </main>
-
-            <BottomNav
-                activeKey="me"
-                onNavigate={(key) => {
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "me") navigate("/me");
-                    if (key === "sleep") navigate("/sleep");
-                    // 实际项目中应添加其他路由
-                }}
-            />
+            <BottomNav activeKey="me"/>
         </div>
     );
 }

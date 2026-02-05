@@ -1,11 +1,8 @@
-import {useNavigate} from "react-router-dom";
 import BottomNav from "../components/ui/BottomNav.jsx";
 import {useEffect} from "react";
 import LayoutEffects from "../components/layout/LayoutEffects";
 
 export default function SleepMonitor() {
-    const navigate = useNavigate();
-
     // 页面初始化：设置标题，保持原始风格的页面标题
     useEffect(() => {
         document.title = "睡眠校准监控 中文版";
@@ -150,20 +147,9 @@ export default function SleepMonitor() {
                     <div className="h-6"></div>
                 </div>
             </div>
-
-            <BottomNav
-                activeKey="sleep"
-                onNavigate={(key) => {
-                    // if (key === "home") navigate("/");
-                    if (key === "atlas") navigate("/atlas");
-                    if (key === "sleep") navigate("/sleep");
-                    if (key === "me") navigate("/me");
-                }}
-            />
-
+            <BottomNav activeKey="sleep"/>
             <div
-                className="pointer-events-none absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]"
-            />
+                className="pointer-events-none absolute inset-0 z-40 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]"/>
         </div>
     );
 }
