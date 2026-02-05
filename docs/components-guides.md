@@ -8,11 +8,11 @@
 **视觉风格**: 半透明背景，Hover 时高亮，点击有缩放效果。
 **文件路径**: `src/components/ui/ActionButton.jsx`
 
-| Prop 名  | 类型     | 默认值 | 描述                         |
-|:--------|:-------|:----|:---------------------------|
-| `icon`  | String | -   | 图标名称 (对应 class`font-icon`) |
-| `label` | String | -   | 主按钮文字                      |
-| `sub`   | String | -   | 按钮下方的微小副文本                 |
+| Prop 名 | 类型   | 默认值 | 描述                             |
+| :------ | :----- | :----- | :------------------------------- |
+| `icon`  | String | -      | 图标名称 (对应 class`font-icon`) |
+| `label` | String | -      | 主按钮文字                       |
+| `sub`   | String | -      | 按钮下方的微小副文本             |
 
 **示例**:
 
@@ -24,15 +24,15 @@
 
 ### `BilingualText`
 
-**描述**: 风格化的双语文本展示组件。用于标题或重要标签，营造由于不仅/机密文件的氛围。
+**描述**: 风格化的双语文本展示组件。用于标签，营造机密文件氛围。
 **视觉风格**: 中文为主，英文为辅（等宽字体、全大写、带 `//` 前缀）。
 **文件路径**: `src/components/ui/BilingualText.jsx`
 
-| Prop 名      | 类型     | 默认值 | 描述               |
-|:------------|:-------|:----|:-----------------|
-| `cn`        | String | -   | 中文内容 (主要)        |
-| `en`        | String | -   | 英文内容 (次要，会自动转大写) |
-| `className` | String | ""  | 额外的容器样式          |
+| Prop 名     | 类型   | 默认值 | 描述                          |
+| :---------- | :----- | :----- | :---------------------------- |
+| `cn`        | String | -      | 中文内容 (主要)               |
+| `en`        | String | -      | 英文内容 (次要，会自动转大写) |
+| `className` | String | ""     | 额外的容器样式                |
 
 **示例**:
 
@@ -48,12 +48,12 @@
 **视觉风格**: 赛博朋克风格的开关，支持颜色变体。
 **文件路径**: `src/components/ui/ToggleItem.jsx`
 
-| Prop 名    | 类型       | 默认值       | 描述                         |
-|:----------|:---------|:----------|:---------------------------|
-| `label`   | String   | -         | 开关标题                       |
-| `desc`    | String   | -         | 开关下方的描述文本                  |
-| `active`  | Boolean  | -         | 开关状态                       |
-| `onClick` | Function | -         | 点击回调                       |
+| Prop 名   | 类型     | 默认值    | 描述                            |
+| :-------- | :------- | :-------- | :------------------------------ |
+| `label`   | String   | -         | 开关标题                        |
+| `desc`    | String   | -         | 开关下方的描述文本              |
+| `active`  | Boolean  | -         | 开关状态                        |
+| `onClick` | Function | -         | 点击回调                        |
 | `color`   | String   | "primary" | "primary"(粉红) 或 "cyan"(青色) |
 
 ---
@@ -81,11 +81,11 @@
 **视觉风格**: 顶部吸附，带有脉冲动画的点缀。
 **文件路径**: `src/components/ui/Header.jsx`
 
-| Prop 名      | 类型     | 默认值          | 描述                   |
-|:------------|:-------|:-------------|:---------------------|
-| `title`     | String | "?"          | 页面大标题                |
-| `subtitle`  | String | "?"          | 页面副标题 (闪烁效果)         |
-| `icon`      | String | "arrow_back" | 返回/左侧按钮图标            |
+| Prop 名     | 类型   | 默认值       | 描述                        |
+| :---------- | :----- | :----------- | :-------------------------- |
+| `title`     | String | "?"          | 页面大标题                  |
+| `subtitle`  | String | "?"          | 页面副标题 (闪烁效果)       |
+| `icon`      | String | "arrow_back" | 返回/左侧按钮图标           |
 | `iconText`  | String | "?"          | 按钮旁边的文字              |
 | `rightText` | String | ""           | 右侧状态文字 (如: "ONLINE") |
 
@@ -97,9 +97,9 @@
 **注意**: 此组件目前硬编码了 tab items (`home`, `atlas`, `sleep`, `me`)，复用时可能需要重构 `items` 为 prop。
 **文件路径**: `src/components/ui/BottomNav.jsx`
 
-| Prop 名       | 类型       | 默认值     | 描述                       |
-|:-------------|:---------|:--------|:-------------------------|
-| `activeKey`  | String   | "atlas" | 当前选中的 Tab Key            |
+| Prop 名      | 类型     | 默认值  | 描述                         |
+| :----------- | :------- | :------ | :--------------------------- |
+| `activeKey`  | String   | "atlas" | 当前选中的 Tab Key           |
 | `onNavigate` | Function | -       | 切换 Tab 回调`(key) => void` |
 
 ---
@@ -144,10 +144,10 @@
 **视觉风格**: 灰阶、高对比度、带锁图标和模糊遮罩。
 **文件路径**: `src/components/LockedCard.jsx`
 
-| Prop 名          | 类型     | 默认值 | 描述           |
-|:----------------|:-------|:----|:-------------|
-| `requiredLevel` | Number | 5   | 解锁所需等级       |
-| `coverUrl`      | String | -   | 背景图 (会显示为黑白) |
+| Prop 名         | 类型   | 默认值 | 描述                  |
+| :-------------- | :----- | :----- | :-------------------- |
+| `requiredLevel` | Number | 5      | 解锁所需等级          |
+| `coverUrl`      | String | -      | 背景图 (会显示为黑白) |
 
 ---
 
@@ -182,16 +182,16 @@
 生成新代码时可参照以下 Tailwind 类名组合：
 
 * **文本颜色**:
-    * 主色: `text-primary` (通常是 Neon Pink/Red)
-    * 暗淡文本: `text-text-dim` (低对比度说明文)
-    * 超小文本: `text-xxxs`, `text-nano`
+  * 主色: `text-primary` (通常是 Neon Pink/Red)
+  * 暗淡文本: `text-text-dim` (低对比度说明文)
+  * 超小文本: `text-xxxs`, `text-nano`
 * **背景**:
-    * 玻璃拟态: `bg-white/5` 或 `bg-black/40` + `backdrop-blur`
-    * 深色表面: `bg-surface-dark`, `bg-background-dark`
+  * 玻璃拟态: `bg-white/5` 或 `bg-black/40` + `backdrop-blur`
+  * 深色表面: `bg-surface-dark`, `bg-background-dark`
 * **特效**:
-    * 边框: `border border-white/10` (几乎所有卡片都有这个微弱边框)
-    * 文字图标: `font-icon` (用于渲染图标字形)
-    * 动画: `animate-pulse` (呼吸灯), `animate-ping` (雷达点)
+  * 边框: `border border-white/10` (几乎所有卡片都有这个微弱边框)
+  * 文字图标: `font-icon` (用于渲染图标字形)
+  * 动画: `animate-pulse` (呼吸灯), `animate-ping` (雷达点)
 * **字体**:
-    * 装饰性标题: `font-display`
-    * 数据/编号: `font-mono`
+  * 装饰性标题: `font-display`
+  * 数据/编号: `font-mono`

@@ -265,19 +265,6 @@
         background: color-mix(in srgb, theme('colors.ink') 60%, transparent);
     }
 
-    /* Modal 进入动画 (通用) */
-    @keyframes modal-scan-in {
-        0% {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-            clip-path: inset(0 0 100% 0);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            clip-path: inset(0 0 0 0);
-        }
-    }
     .animate-modal-entry {
         animation: modal-scan-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     }
@@ -295,7 +282,8 @@
     }
 
     .effect-scanlines {
-        @apply pointer-events-none z-0 bg-scanlines opacity-10;
+        @apply pointer-events-none z-0 bg-scanlines opacity-20;
+        animation: pulse 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
     }
 
     .effect-glow {
@@ -318,6 +306,7 @@
     /* Effects Utilities (统一复用) */
     .effect-scanlines-soft {
         @apply pointer-events-none bg-scanlines opacity-10;
+        animation: pulse 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
     }
 
     .effect-noise-soft {
@@ -344,6 +333,20 @@
     }
 }
 
+/* Modal 进入动画 (通用) */
+@keyframes modal-scan-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        clip-path: inset(0 0 100% 0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
 @keyframes glitch-anim {
     0% {
         clip-path: inset(0% 0 0% 0);
@@ -365,6 +368,18 @@
     }
     100% {
         clip-path: inset(20% 0 30% 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.8;
     }
 }
 
