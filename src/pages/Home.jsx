@@ -1,196 +1,204 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+
+// 引入组件库
 import BottomNav from "../components/ui/BottomNav.jsx";
 import LayoutEffects from "../components/layout/LayoutEffects";
+import ActionButton from "../components/ui/ActionButton";
 import BilingualText from "../components/ui/BilingualText";
+import EntityCard from "../components/EntityCard";
+import LockedCard from "../components/LockedCard";
 import BroadcastTicker from "../components/BroadcastTicker";
 import CircadianDial from "../components/CircadianDial";
-import {broadcastMessages, tacticalModules} from "../data/home-data";
+import {broadcastMessages, feedItems, quickActions} from "../data/home-data";
+import {currentUser} from "../data/user-data"; // 假设这里有用户名
 
 export default function Home() {
     const navigate = useNavigate();
 
-    // --- State ---
+    // --- State Management ---
     const [booted, setBooted] = useState(false);
-    const [noiseLevel, setNoiseLevel] = useState(10); // 0 - 100
-    const [stability, setStability] = useState(94);
+    const [noiseLevel, setNoiseLevel] = useState(15); // 现实调频器数值
+    const [syncProgress, setSyncProgress] = useState(currentUser?.stats?.stability?.val || 64); // 模拟初始同步值
 
     // --- Effects ---
     useEffect(() => {
         document.title = "控制台 | COMMAND";
+        // 开场动画延迟
         const timer = setTimeout(() => setBooted(true), 100);
-
-        // 模拟稳定性波动
-        const interval = setInterval(() => {
-            setStability(prev => Math.min(100, Math.max(0, prev + (Math.random() > 0.5 ? 1 : -1))));
-        }, 2000);
-
-        return () => {
-            clearTimeout(timer);
-            clearInterval(interval);
-        };
+        return () => clearTimeout(timer);
     }, []);
 
-    // 处理导航跳转
-    const handleActionClick = (id) => {
-        if (id === 'map') navigate('/atlas');
-        // 其他路由逻辑...
+    // 模拟点击同步按钮
+    const handleSync = () => {
+        if (syncProgress < 100) {
+            setSyncProgress(prev => Math.min(100, prev + 10));
+        }
     };
 
     return (
-        <div className="layout-page layout-frame font-mono text-white relative">
+        <div className="layout-page layout-frame font-mono text-white relative min-h-screen">
 
-            {/* 创新点 2: 交互式现实调谐器
-               Slider 的值直接控制 LayoutEffects 的噪点强度
-            */}
+            {/* 1. 全局特效层：受 Noise Level 控制 */}
             <LayoutEffects
                 noise={noiseLevel > 50 ? "strong" : "soft"}
                 scanlines={true}
-                glitchIntensity={noiseLevel / 100} // 假设 LayoutEffects 支持此 prop，或作为扩展思路
             />
 
-            {/* 如果噪点调得很高，显示隐藏图层 */}
-            {noiseLevel > 80 && (
-                <div
-                    className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center mix-blend-overlay opacity-30">
-                    <h1 className="text-9xl font-black text-red-600 rotate-12 blur-sm">WAKE UP</h1>
-                </div>
-            )}
+            {/* 高噪点模式下的隐藏彩蛋 (Visual Noise Overlay) */}
+            <div
+                className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay transition-opacity duration-300"
+                style={{opacity: (noiseLevel - 20) / 100}}
+            >
+                <div className="w-full h-full bg-noise opacity-50"/>
+            </div>
 
-            {/* --- Header --- */}
+            {/* --- Header Area: Welcome & Status --- */}
             <header
-                className={`p-5 flex justify-between items-end border-b border-white/10 bg-black/20 backdrop-blur-sm transition-all duration-500 ${booted ? 'opacity-100' : 'opacity-0 -translate-y-2'}`}>
+                className={`shrink-0 p-5 pb-0 flex justify-between items-start transition-all duration-700 ${booted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
                 <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <div
-                            className={`w-2 h-2 rounded-full ${stability > 80 ? 'bg-teal-400 shadow-[0_0_8px_#2dd4bf]' : 'bg-red-500 animate-pulse'}`}/>
-                        <span className="text-[10px] tracking-widest text-text-dim">NET_STATUS: ONLINE</span>
+                    <div className="flex items-center gap-2 text-primary mb-1">
+                        <span className="font-icon text-sm">terminal</span>
+                        <span className="text-xs font-bold tracking-widest">COMMAND CENTER</span>
                     </div>
-                    <BilingualText cn="现实锚点" en="REALITY ANCHOR" className="text-lg font-bold"/>
+                    <h1 className="text-xl font-display font-bold tracking-wide text-white">
+                        WELCOME, <span className="text-text-dim">{currentUser.name}</span>
+                    </h1>
+                    <div className="text-[10px] text-text-dim mt-1 flex gap-2">
+                        <span>// DATE: 2077.11.02</span>
+                        <span className={noiseLevel > 80 ? "text-red-500 font-bold animate-pulse" : ""}>
+                            // REALITY: {noiseLevel > 80 ? "UNSTABLE" : "STABLE"}
+                        </span>
+                    </div>
                 </div>
-                <div className="text-right">
-                    <div className="text-[10px] text-text-dim mb-0.5">DAY 142</div>
-                    <div className="font-display text-xl text-white tracking-wider">20:42 PM</div>
+                {/* 简单的天气/环境图标 */}
+                <div className="glass-card p-2 rounded flex flex-col items-center justify-center w-12 h-12">
+                    <span className="font-icon text-xl text-teal-400">cloud</span>
+                    <span className="text-[9px] font-bold">24°C</span>
                 </div>
             </header>
 
-            <main className="flex-1 overflow-y-auto px-5 pb-32 pt-4 relative z-10 scroll-smooth">
+            {/* --- Main Scrollable Area --- */}
+            <main className="px-5 pb-32 pt-2 relative z-10">
 
-                {/* --- Section 1: Visual Clock (The Circadian Dial) --- */}
+                {/* --- Section 1: Hero / Daily Sync --- */}
+                {/* 融合点：使用 Circadian Dial 展示 User 的 Daily Mission 状态 */}
                 <section
-                    className={`transition-all duration-700 delay-100 ${booted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                    <CircadianDial stability={stability}/>
+                    onClick={handleSync}
+                    className={`transition-all duration-700 delay-100 ${booted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+                >
+                    <CircadianDial progress={syncProgress}/>
 
-                    {/* 辅助数据 */}
-                    <div className="flex justify-between px-2 mt-4 text-center">
-                        <div>
-                            <div className="text-[9px] text-text-dim uppercase tracking-widest">REM Index</div>
-                            <div className="font-mono text-primary text-sm">1.28σ</div>
-                        </div>
-                        <div>
-                            <div className="text-[9px] text-text-dim uppercase tracking-widest">Sync Rate</div>
-                            <div className="font-mono text-teal-400 text-sm">98.2%</div>
-                        </div>
+                    {/* 辅助操作提示 */}
+                    <div className="text-center -mt-4 mb-6">
+                        <p className="text-[10px] text-text-dim animate-pulse">
+                            {syncProgress >= 100 ? "SYNC COMPLETE" : "TAP TO STABILIZE WAVEFORM"}
+                        </p>
                     </div>
                 </section>
 
-                {/* --- Section 2: Tactical Deck (Grid) --- */}
+                {/* --- Section 2: Quick Command Grid --- */}
+                {/* 融合点：使用 User 指定的 ActionButton，但放在网格布局中 */}
                 <section
-                    className={`mt-8 transition-all duration-700 delay-200 ${booted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <div className="flex items-center gap-2 mb-3">
-                        <span className="w-1 h-3 bg-primary"/>
-                        <span className="text-xs font-bold tracking-widest text-white/80">TACTICAL DECK</span>
-                        <div className="h-[1px] flex-1 bg-white/10"/>
+                    className={`mb-6 transition-all duration-700 delay-200 ${booted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    <div className="flex items-center justify-between mb-3 px-1">
+                        <BilingualText cn="快捷指令" en="TACTICAL_DECK" className="text-xs font-bold"/>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                        {tacticalModules.map((item) => (
-                            <button
-                                key={item.id}
-                                disabled={item.disabled}
-                                onClick={() => handleActionClick(item.id)}
-                                className={`
-                                    relative p-4 h-24 flex flex-col justify-between items-start 
-                                    border bg-black/40 backdrop-blur-md rounded-lg transition-all duration-300 group overflow-hidden
-                                    ${item.disabled ? 'border-white/5 opacity-50 cursor-not-allowed' : 'border-white/10 hover:border-primary/50 hover:bg-white/5 active:scale-95'}
-                                `}
-                            >
-                                {/* 装饰背景 */}
-                                <div
-                                    className="absolute right-0 top-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <span className="font-icon text-4xl">{item.icon}</span>
-                                </div>
-
-                                {/* 顶部标签 */}
-                                <span
-                                    className={`text-[9px] font-mono border px-1 rounded ${item.disabled ? 'border-white/10 text-white/30' : 'border-primary/30 text-primary'}`}>
-                                    {item.sub}
-                                </span>
-
-                                {/* 底部文字 */}
-                                <div className="z-10">
-                                    <span
-                                        className={`block font-display text-lg tracking-wide ${item.color === 'primary' ? 'text-primary' : 'text-white'}`}>
-                                        {item.label}
-                                    </span>
-                                </div>
-
-                                {/* 选中态角落光标 */}
-                                {!item.disabled && (
-                                    <>
-                                        <div
-                                            className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary opacity-0 group-hover:opacity-100 transition-opacity"/>
-                                        <div
-                                            className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity"/>
-                                    </>
-                                )}
-                            </button>
+                        {quickActions.map((action, idx) => (
+                            <ActionButton
+                                key={idx}
+                                icon={action.icon}
+                                label={action.label}
+                                sub={action.sub}
+                                // 这里可以添加点击事件跳转
+                                onClick={() => action.sub === 'ATLAS' && navigate('/atlas')}
+                            />
                         ))}
                     </div>
                 </section>
 
-                {/* --- Section 3: Reality Tuner (Innovative Interaction) --- */}
+                {/* --- Section 3: Reality Tuner & Discovery Feed --- */}
+                {/* 融合点：Slider 控制 Feed 流的感知 */}
                 <section
-                    className={`mt-8 transition-all duration-700 delay-300 ${booted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                    <div className="glass-card p-4 rounded-xl border border-white/10 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-scanlines opacity-10 pointer-events-none"/>
+                    className={`transition-all duration-700 delay-300 ${booted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
 
+                    {/* Tuner Control */}
+                    <div className="glass-card p-3 rounded-xl border border-white/10 mb-4 bg-black/40">
                         <div className="flex justify-between items-center mb-2">
-                             <span className="text-xs font-bold text-white flex items-center gap-2">
-                                <span className="font-icon text-sm animate-spin">settings</span>
+                            <span className="text-[10px] font-bold text-text-dim flex items-center gap-2">
+                                <span className="font-icon text-xs">tune</span>
                                 REALITY_FILTER
-                             </span>
-                            <span className="font-mono text-primary text-xs">{noiseLevel}%</span>
+                            </span>
+                            <span className={`font-mono text-xs ${noiseLevel > 70 ? 'text-primary' : 'text-teal-400'}`}>
+                                {noiseLevel}%
+                            </span>
                         </div>
-
                         <input
                             type="range"
                             min="0"
                             max="100"
                             value={noiseLevel}
                             onChange={(e) => setNoiseLevel(Number(e.target.value))}
-                            className="cyber-range mt-2"
+                            className="cyber-range"
                         />
+                    </div>
 
-                        <div className="flex justify-between text-[8px] text-text-dim mt-2 font-mono uppercase">
-                            <span>Safe Mode</span>
-                            <span>Deep Dive</span>
-                        </div>
+                    {/* Feed Title */}
+                    <div className="flex items-center justify-between mb-3 px-1 border-b border-white/5 pb-1">
+                        <BilingualText cn="截获信号" en="INTERCEPTED_FEED" className="text-xs font-bold"/>
+                        <span className="text-[9px] text-text-dim">
+                            {noiseLevel > 60 ? "HIDDEN_ENTITIES_VISIBLE" : "STANDARD_MODE"}
+                        </span>
+                    </div>
+
+                    {/* Feed Items List */}
+                    <div className="space-y-3">
+                        {feedItems.map((item) => {
+                            // 简单的逻辑：如果是 'locked' 类型，且 noiseLevel 不够高，则显得更加模糊或不可见
+                            const isRevealed = noiseLevel > 80;
+
+                            if (item.type === 'locked') {
+                                return (
+                                    <div key={item.id} className={isRevealed ? "animate-pulse" : ""}>
+                                        <LockedCard
+                                            requiredLevel={item.requiredLevel}
+                                            coverUrl={item.coverUrl}
+                                        />
+                                        {isRevealed &&
+                                            <div className="text-center text-[9px] text-primary mt-1">GHOST SIGNAL
+                                                DETECTED</div>}
+                                    </div>
+                                );
+                            }
+
+                            return (
+                                <EntityCard
+                                    key={item.id}
+                                    code={item.code}
+                                    title={item.title}
+                                    coverUrl={item.coverUrl}
+                                    status={item.status}
+                                    progress={item.progress}
+                                />
+                            );
+                        })}
+                        {/* Empty Spacer for scroll */}
+                        <div className="h-4"/>
                     </div>
                 </section>
             </main>
 
-            {/* --- Footer Area --- */}
-            <div className="fixed bottom-[70px] left-0 right-0 max-w-md mx-auto z-20">
-                <BroadcastTicker messages={broadcastMessages}/>
-            </div>
-
+            {/* --- Footer Fixed Area --- */}
+            {/* 融合点：Ticker 放在 Nav 上方 */}
+            <BroadcastTicker messages={broadcastMessages}/>
             <BottomNav
                 activeKey="home"
                 onNavigate={(key) => {
                     if (key === "atlas") navigate("/atlas");
                     if (key === "me") navigate("/me");
-                    if (key === "sleep") navigate("/sleep"); // 假设
+                    // 实际路由跳转...
                 }}
             />
         </div>

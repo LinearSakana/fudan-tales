@@ -29,7 +29,7 @@ export default function Settings() {
     };
 
     return (
-        <div className="layout-page layout-frame font-mono text-white selection:bg-primary selection:text-white">
+        <div className="layout-page layout-frame font-mono">
             <LayoutEffects noise="soft" scanlines={config.hudEffects}/>
 
             <Header title={""} subtitle={""} icon="arrow_back" iconText={"返回"}

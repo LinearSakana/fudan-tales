@@ -43,7 +43,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="layout-page layout-frame font-mono text-white selection:bg-primary selection:text-white">
+        <div className="layout-page layout-frame font-mono text-white">
 
             {/* --- 全局模态框 (Portal/Overlay) --- */}
             {/* 当 selectedEngram 存在时，Modal 会渲染并覆盖在页面上方 */}
