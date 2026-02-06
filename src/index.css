@@ -14,6 +14,24 @@
         /* 定义安全区域变量 */
         --sat: env(safe-area-inset-top);
         --sab: env(safe-area-inset-bottom);
+        --background: 339 54% 10%;
+        --foreground: 0 0% 100%;
+        --card: 336 38% 14%;
+        --card-foreground: 0 0% 100%;
+        --popover: 336 38% 14%;
+        --popover-foreground: 0 0% 100%;
+        --primary: 340 100% 50%;
+        --primary-foreground: 0 0% 100%;
+        --muted: 336 26% 20%;
+        --muted-foreground: 335 40% 68%;
+        --accent: 336 26% 20%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 335 18% 34%;
+        --input: 335 18% 34%;
+        --ring: 340 100% 50%;
+        --radius: 0.75rem;
     }
 
     /* 铺满全屏 */

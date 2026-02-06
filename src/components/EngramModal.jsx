@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import BilingualText from './ui/BilingualText';
 
 export default function EngramModal({engram, onClose}) {
-    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
 

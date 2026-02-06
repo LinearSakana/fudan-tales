@@ -7,6 +7,7 @@ import Profile from "./pages/Profile"
 import SleepMonitor from "./pages/SleepMonitor"
 import Settings from "./pages/Settings.jsx";
 import Home from "./pages/Home.jsx";
+import UiTest from "./pages/UiTest.jsx";
 
 export default function App() {
     useEffect(() => {
@@ -29,6 +30,7 @@ export default function App() {
                 <Route path="/me" element={<Profile/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/home" element={<Home/>}/>
+                <Route path="/ui-test" element={<UiTest/>}/>
             </Routes>
         </div>
     );
