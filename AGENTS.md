@@ -33,7 +33,7 @@
 - Components/pages use `PascalCase` filenames (`ActionButton.jsx`, `SleepMonitor.jsx`).
 - Data/helper modules use kebab-case (`home-data.js`, `card-details.js`).
 - Prefer Tailwind utility classes and existing theme tokens from `tailwind.config.js`.
-- 写的代码要采用适当的中文注释！如果发觉已有文件注释太少，可以顺手补充一些注释，帮助用户理解代码逻辑。
+- 写代码要采用适当的中文注释！如果发觉已有文件注释太少，可以顺手补充一些注释，帮助用户理解代码逻辑。
 
 ## Testing Guidelines
 
@@ -55,7 +55,7 @@
 
 ---
 
-关于项目的其他参考文档，请查看 `docs/` 目录中的相关文件。
+关于项目其他参考文档，请查看 `docs/` 目录中的相关文件。
 
 - docs/style-guides.md：UI 设计和样式指南。
 - docs/components.md：组件库参考。
