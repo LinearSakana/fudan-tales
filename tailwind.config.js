@@ -9,6 +9,11 @@ export default {
             extra: 700,
         },
         extend: {
+            // 安全距离
+            spacing: {
+                'sat': 'var(--sat)',
+                'sab': 'var(--sab)',
+            },
             colors: {
                 "primary": "#ff0055",
                 "primary-dark": "#cc0044",

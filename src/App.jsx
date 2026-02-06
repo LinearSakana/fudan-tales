@@ -10,27 +10,26 @@ import Home from "./pages/Home.jsx";
 
 export default function App() {
     useEffect(() => {
-        const hideSystemNavBar = async () => {
-            // 设置 StatusBar 的样式
-            await StatusBar.setOverlaysWebView({overlay: true});
-            await StatusBar.setStyle({style: 'DARK'});
-
-            // 获取系统的导航栏高度并设置页面底部内边距
-            const navBarHeight = await StatusBar.getHeight();
-            document.body.style.paddingBottom = `${navBarHeight + 50}px`;
+        const setupStatusBar = async () => {
+            await StatusBar.setBackgroundColor({color: '#FFFFFF'});
+            // 让状态栏覆盖在 Webview 上（这样背景色可以统一）
+            await StatusBar.setOverlaysWebView({overlay: false});
+            // 设置文字颜色
+            await StatusBar.setStyle('DARK');
         };
-
-        hideSystemNavBar();
+        setupStatusBar();
     }, []);
     return (
-        <Routes>
-            <Route path="/" element={<Navigate to="/home" replace/>}/>
-            <Route path="/atlas" element={<Atlas/>}/>
-            <Route path="/atlas/:code" element={<AtlasDetail/>}/>
-            <Route path="/sleep" element={<SleepMonitor/>}/>
-            <Route path="/me" element={<Profile/>}/>
-            <Route path="/settings" element={<Settings/>}/>
-            <Route path="/home" element={<Home/>}/>
-        </Routes>
+        <div className={"app-container"}>
+            <Routes>
+                <Route path="/" element={<Navigate to="/home" replace/>}/>
+                <Route path="/atlas" element={<Atlas/>}/>
+                <Route path="/atlas/:code" element={<AtlasDetail/>}/>
+                <Route path="/sleep" element={<SleepMonitor/>}/>
+                <Route path="/me" element={<Profile/>}/>
+                <Route path="/settings" element={<Settings/>}/>
+                <Route path="/home" element={<Home/>}/>
+            </Routes>
+        </div>
     );
 }

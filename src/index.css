@@ -10,15 +10,26 @@
 }
 
 @layer base {
+    :root {
+        /* 定义安全区域变量 */
+        --sat: env(safe-area-inset-top);
+        --sab: env(safe-area-inset-bottom);
+    }
+
     /* 铺满全屏 */
     #root {
         width: 100%;
-        min-height: 100vh;
+        min-height: calc(100vh + var(--sat) + var(--sab));
     }
 
     /* 基础重置 */
     *, *::before, *::after {
         box-sizing: border-box;
+    }
+
+    .app-container {
+        padding-top: var(--sat);
+        padding-bottom: var(--sab);
     }
 
     body {
@@ -110,6 +121,8 @@
 
     /* Layout: 页面与容器 */
     .layout-page {
+        padding-top: var(--sat);
+        padding-bottom: var(--sab);
         @apply relative min-h-screen w-full max-w-md mx-auto flex flex-col;
     }
 
@@ -123,6 +136,7 @@
 
     /* Header / TopBar */
     .header-bar {
+        padding-top: var(--sat);
         @apply flex items-center border-b border-white/10 bg-black/80 backdrop-blur-sm;
     }
 
