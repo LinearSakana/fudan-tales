@@ -35,7 +35,7 @@ export default function EntityCard({
                 variant={isAnalyzing ? "warning" : "default"}
                 className="absolute top-2 right-2 z-20 flex items-center gap-1 bg-black/60 backdrop-blur">
                 <div className={["w-1.5 h-1.5 rounded-full animate-pulse", badgeDotClass].join(" ")}/>
-                <span className="text-[9px] font-bold">{badgeLabel}</span>
+                <span className="text-xxxs font-bold">{badgeLabel}</span>
             </Badge>
 
             {/* 封面图 */}
@@ -51,7 +51,7 @@ export default function EntityCard({
 
             {/* 底部信息 */}
             <div className="absolute bottom-0 left-0 w-full p-3">
-                <p className="text-[10px] text-primary font-mono mb-0.5 tracking-wider">{code}</p>
+                <p className="text-xxs text-primary font-mono mb-0.5 tracking-wider">{code}</p>
                 <h3 className="text-white text-sm font-bold leading-tight">{title}</h3>
 
                 <Progress

@@ -142,7 +142,7 @@ export default function AtlasDetail() {
                                             <span
                                                 className="font-icon text-white text-[12px]">{statusIcon}</span>
                                             <span
-                                                className="text-white text-[10px] font-mono tracking-wider">{statusLabel}</span>
+                                                className="text-white text-xxs font-mono tracking-wider">{statusLabel}</span>
                                         </div>
                                     </div>
 
@@ -184,8 +184,8 @@ export default function AtlasDetail() {
                                     <div className="flex justify-between items-start">
                                         <div>
                                             <BilingualText cn={detail.supply.typeLabelCn} en={detail.supply.typeLabelEn}
-                                                           className="mb-2 text-[10px] text-gray-700"/>
-                                            <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">{detail.supply.typeLabel}</p>
+                                                           className="mb-2 text-xxs text-gray-700"/>
+                                            <p className="text-xxs font-bold text-gray-500 uppercase mb-1">{detail.supply.typeLabel}</p>
                                             <h3 className="text-lg font-bold leading-tight mb-1">{detail.supply.title}</h3>
                                             <div
                                                 className="flex items-baseline gap-1 text-primary font-extra font-mono">

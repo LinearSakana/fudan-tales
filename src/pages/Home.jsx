@@ -167,7 +167,7 @@ export default function Home() {
                     <h1 className="text-xl font-display font-bold tracking-wide text-white">
                         WELCOME, <span className="text-text-dim">{currentUser.name}</span>
                     </h1>
-                    <div className="text-[10px] text-text-dim mt-1 flex gap-2">
+                    <div className="text-xxs text-text-dim mt-1 flex gap-2">
                         <span>// DATE: 2077.11.02</span>
                         <span className={noiseLevel > 80 ? "text-red-500 font-bold animate-pulse" : ""}>
                             // REALITY: {noiseLevel > 80 ? "UNSTABLE" : "STABLE"}
@@ -177,7 +177,7 @@ export default function Home() {
                 <Card
                     className="p-2 rounded flex flex-col items-center justify-center w-12 h-12 bg-card/80 backdrop-blur-sm border-white/10">
                     <span className="font-icon text-xl text-teal-400">cloud</span>
-                    <span className="text-[9px] font-bold">24°C</span>
+                    <span className="text-xxxs font-bold">24°C</span>
                 </Card>
             </header>
 
@@ -187,7 +187,7 @@ export default function Home() {
                     <CircadianDial progress={syncProgress} onSync={handleSync}/>
 
                     <div className="text-center -mt-4 mb-6">
-                        <p className="text-[10px] text-text-dim animate-pulse">
+                        <p className="text-xxs text-text-dim animate-pulse">
                             {syncProgress >= 100 ? "SYNC COMPLETE" : "TAP TO STABILIZE WAVEFORM"}
                         </p>
                     </div>

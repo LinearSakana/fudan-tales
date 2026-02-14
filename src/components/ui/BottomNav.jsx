@@ -52,7 +52,7 @@ export default function BottomNav({
                             {it.icon}
                         </span>
                         <span
-                            className="text-[10px] whitespace-nowrap font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-opacity absolute -top-3 bg-black px-1">
+                            className="text-xxs whitespace-nowrap font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-opacity absolute -top-3 bg-black px-1">
                             {it.label}
                         </span>
                     </Button>

@@ -15,7 +15,7 @@ export default function AtlasHeader({
             className="header-bar-muted p-4 pb-2 flex flex-col gap-4">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-primary text-[10px] font-bold font-display uppercase mb-1 animate-pulse">
+                    <h2 className="text-primary text-xxs font-bold font-display uppercase mb-1 animate-pulse">
                         {subtitle}
                     </h2>
                     <h1 className="header-title text-3xl font-black">{title}</h1>

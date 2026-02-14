@@ -13,7 +13,7 @@ const BroadcastTicker = ({messages}) => {
             <div className="animate-marquee whitespace-nowrap flex gap-12 items-center min-w-full">
                 {messages.map((msg, idx) => (
                     <span key={idx}
-                          className="text-[10px] font-mono text-primary/80 tracking-wider flex items-center gap-2">
+                          className="text-xxs font-mono text-primary/80 tracking-wider flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse shadow-[0_0_5px_#ff0055]"/>
                         <span className="opacity-80">[{msg}]</span>
                     </span>

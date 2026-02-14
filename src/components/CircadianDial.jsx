@@ -34,7 +34,7 @@ const CircadianDial = ({progress = 0, onSync = null}) => {
                 {/* 扫描线 */}
                 <div className="absolute inset-0 bg-scanlines opacity-20 pointer-events-none"/>
 
-                <span className="text-[9px] text-text-dim tracking-widest mb-1">SYNC STATUS</span>
+                <span className="text-xxxs text-text-dim tracking-widest mb-1">SYNC STATUS</span>
                 <span className="text-3xl font-display font-bold text-white text-glow">
                     {Number(progress).toFixed(1)}%
                 </span>
@@ -44,7 +44,7 @@ const CircadianDial = ({progress = 0, onSync = null}) => {
                     className="mt-2 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/5">
                     <div
                         className={`w-1.5 h-1.5 rounded-full ${progress >= 100 ? 'bg-teal-400' : 'bg-primary animate-pulse'}`}/>
-                    <span className="text-[8px] font-mono text-white/70">
+                    <span className="text-nano font-mono text-white/70">
                         {progress >= 100 ? 'STABLE' : 'REQUIRED'}
                     </span>
                 </div>

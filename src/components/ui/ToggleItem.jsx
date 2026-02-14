@@ -21,7 +21,7 @@ export default function ToggleItem({label, desc, active, onClick, color = "prima
                 <div className={`text-xs font-bold transition-colors ${active ? 'text-white' : 'text-text-dim'}`}>
                     {label}
                 </div>
-                <div className="text-[10px] text-white/30">{desc}</div>
+                <div className="text-xxs text-white/30">{desc}</div>
             </div>
             {/* 使用 shadcn/ui Switch 替代自定义开关 */}
             <Switch

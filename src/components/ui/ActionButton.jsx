@@ -33,7 +33,7 @@ export default function ActionButton({
 
             {/* 顶部标签 (Sub 属性作为技术代码) */}
             <span className={`
-                text-[9px] font-mono border px-1 rounded z-10 backdrop-blur-sm
+                text-xxxs font-mono border px-1 rounded z-10 backdrop-blur-sm
                 ${disabled ? 'border-white/10 text-white/30' : 'border-primary/30 text-primary'}
             `}>
                 {sub}

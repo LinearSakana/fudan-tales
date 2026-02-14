@@ -61,14 +61,14 @@ export default function SoundscapeMixer({
                     variant={isPreviewing ? "default" : "secondary"}
                     size="sm"
                     onClick={handleTogglePreview}
-                    className="px-3 py-1.5 text-[10px] h-auto"
+                    className="px-3 py-1.5 text-xxs h-auto"
                 >
                     <span className="font-icon text-sm">{isPreviewing ? "stop_circle" : "play_circle"}</span>
                     <span>{isPreviewing ? "STOP_PREVIEW" : "PLAY_PREVIEW"}</span>
                 </Button>
             </div>
 
-            <p className="text-[10px] text-text-dim mb-3 leading-relaxed">
+            <p className="text-xxs text-text-dim mb-3 leading-relaxed">
                 {activePreset?.description}
             </p>
 
@@ -95,7 +95,7 @@ export default function SoundscapeMixer({
             <div className="space-y-3">
                 {channels.map((channel) => (
                     <div key={channel.id}>
-                        <div className="flex items-center justify-between text-[10px] mb-1">
+                        <div className="flex items-center justify-between text-xxs mb-1 p-1.5">
                             <span className="text-white/85 tracking-wide">{channel.label}</span>
                             <span className="font-mono text-text-dim">{levels[channel.id]}%</span>
                         </div>
@@ -111,7 +111,7 @@ export default function SoundscapeMixer({
             </div>
 
             <div
-                className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[9px] text-text-dim">
+                className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xxxs text-text-dim">
                 <span className="tracking-widest">AUDIO_ENGINE: {audioReady ? "WEBAUDIO_DEMO" : "READY_PENDING"}</span>
                 <span className={isPreviewing ? "text-primary animate-pulse" : ""}>
                     {isPreviewing ? "LIVE_MONITORING" : "STANDBY"}

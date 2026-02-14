@@ -87,7 +87,7 @@ export default function Profile() {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <h1 className="text-2xl font-display font-bold tracking-wider">{currentUser.name}</h1>
-                                    <p className="text-[10px] text-primary font-bold tracking-[-0.02em]">{currentUser.alias}</p>
+                                    <p className="text-xxs text-primary font-bold tracking-[-0.02em]">{currentUser.alias}</p>
                                 </div>
                                 <span className="font-icon text-white/20 text-3xl pr-4 pl-4 pb-2.5 pt-2"
                                       onClick={() => navigate("/settings")}>fingerprint</span>
@@ -183,7 +183,7 @@ export default function Profile() {
                                         className="flex flex-col items-center gap-2 flex-1 group h-full justify-end cursor-pointer"
                                     >
                                         <div
-                                            className={`absolute -top-2 text-[9px] font-bold transition-opacity duration-300 ${isActive ? 'opacity-100 text-white' : 'opacity-0 text-text-dim'}`}>
+                                            className={`absolute -top-2 text-xxxs font-bold transition-opacity duration-300 ${isActive ? 'opacity-100 text-white' : 'opacity-0 text-text-dim'}`}>
                                             {log.hours}h
                                         </div>
                                         <div
@@ -194,7 +194,7 @@ export default function Profile() {
                                             />
                                         </div>
                                         <span
-                                            className={`text-[9px] font-mono transition-colors ${isActive ? 'text-primary font-bold' : 'text-text-dim'}`}>
+                                            className={`text-xxxs font-mono transition-colors ${isActive ? 'text-primary font-bold' : 'text-text-dim'}`}>
                                             {log.day.charAt(0)}
                                         </span>
                                     </div>

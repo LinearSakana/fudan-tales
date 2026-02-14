@@ -57,15 +57,16 @@
 
 **重复形态**：小字号标签 + `font-mono` + uppercase + tracking，常用于状态/稀有度/元信息。
 
-- `badge`: `text-[8px] uppercase font-mono tracking-widest rounded border px-1.5 py-0.5`。
+- `badge`: `text-nano uppercase font-mono tracking-widest rounded border px-1.5 py-0.5`。
 - `badge-soft`: `bg-white/5 border-white/10 text-text-dim`。
 - `badge-primary`: `bg-primary/20 border-primary/30 text-primary`。
 
 **出现位置举例**
-- EngramList 稀有度标签（text-[8px], border, font-mono）。【F:src/components/EngramList.jsx†L38-L45】
+
+- EngramList 稀有度标签（text-nano, border, font-mono）。【F:src/components/EngramList.jsx†L38-L45】
 - EntityCard 右上角状态徽章（bg-black/60 + border + text）。【F:src/components/EntityCard.jsx†L26-L41】
-- Profile 身份等级标签（text-[9px], border, bg）。【F:src/pages/Profile.jsx†L93-L98】
-- AtlasHeader 同步信息（text-[10px] + font-mono）。【F:src/components/AtlasHeader.jsx†L54-L56】
+- Profile 身份等级标签（text-[xxxs, border, bg）。【F:src/pages/Profile.jsx†L93-L98】
+- AtlasHeader 同步信息（text-xxs + font-mono）。【F:src/components/AtlasHeader.jsx†L54-L56】
 
 **Tailwind 规范建议**
 - 使用统一 `badge` 体系：大小/字重/间距一致，颜色改为 `variant` 传参（`badge badge-primary`, `badge badge-muted`）。
