@@ -90,13 +90,15 @@ export default function HoldToTriggerButton({
             disabled={disabled}
             {...props}
         >
-            {/* Background Fill Progress */}
+            {/* Background Fill Progress (Striped) */}
             <div
                 className="absolute inset-0 bg-primary/20 transition-all ease-linear"
                 style={{
                     width: `${progress}%`,
                     opacity: isHolding ? 1 : 0,
-                    transitionDuration: isHolding ? '0ms' : '300ms' // Immediate update when holding, smooth fade out
+                    transitionDuration: isHolding ? '0ms' : '300ms',
+                    backgroundImage: 'linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent)',
+                    backgroundSize: '10px 10px'
                 }}
             />
 
@@ -115,9 +117,19 @@ export default function HoldToTriggerButton({
                 {children}
             </div>
 
-            {/* Border Glitch visuals (optional decoration) */}
+            {/* Border Glitch visuals */}
             <div
-                className={`absolute inset-0 border-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-transparent'}`}/>
+                className={`absolute inset-0 border-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-white/10'}`}/>
+
+            {/* Corner Brackets */}
+            <div
+                className={`absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-white/30'}`}/>
+            <div
+                className={`absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-white/30'}`}/>
+            <div
+                className={`absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-white/30'}`}/>
+            <div
+                className={`absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 transition-colors duration-300 ${isHolding ? 'border-primary' : 'border-white/30'}`}/>
         </button>
     );
 }

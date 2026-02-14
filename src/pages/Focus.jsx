@@ -88,15 +88,28 @@ export default function Focus() {
 
                 {/* Timer Display */}
                 <div className="relative mb-12 group">
-                    {/* Outer Ring */}
+                    {/* 1. Outer Rotating Ring (Dashed) */}
                     <div
-                        className={`absolute inset-[-30px] border border-dashed border-white/10 rounded-full w-[300px] h-[300px] transition-all duration-[1s] ${isFocusing ? "animate-spin-slow opacity-20 border-primary/30" : "opacity-10"}`}/>
+                        className={`absolute inset-[-40px] border border-dashed border-white/10 rounded-full w-[320px] h-[320px] transition-all duration-[1s] ${isFocusing ? "animate-spin-slow opacity-20 border-primary/30" : "opacity-10"}`}/>
 
-                    {/* Progress Circle (Canvas/SVG) */}
+                    {/* 2. Middle Ring (Ticks) */}
+                    <div
+                        className={`absolute inset-[-20px] w-[280px] h-[280px] rounded-full border border-white/5 flex items-center justify-center ${isFocusing ? "animate-pulse" : ""}`}>
+                        {Array.from({length: 12}).map((_, i) => (
+                            <div key={i} className="absolute w-full h-full" style={{transform: `rotate(${i * 30}deg)`}}>
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-white/20"/>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* 3. Progress Circle (Canvas/SVG) */}
                     <svg className="w-60 h-60 transform -rotate-90 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
                          viewBox="0 0 100 100">
                         {/* Bg Circle */}
                         <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+                        {/* Inner Decoration Circle */}
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="8"/>
+
                         {/* Progress Circle */}
                         <circle
                             cx="50" cy="50" r="46" fill="none"
@@ -112,13 +125,18 @@ export default function Focus() {
                     {/* Time Text */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <span
-                            className={`text-xxxs tracking-widest mb-2 ${isFocusing ? "text-primary animate-pulse" : "text-text-dim"}`}>
-                            {isFocusing ? "REMAINING" : "DURATION"}
+                            className={`text-xxxs tracking-widest mb-2 font-mono ${isFocusing ? "text-primary animate-pulse" : "text-text-dim"}`}>
+                            {isFocusing ? "/// REMAINING ///" : "DURATION"}
                         </span>
                         <span
-                            className={`text-6xl font-bold font-mono tracking-tighter ${isFocusing ? "text-primary text-glow" : "text-white"}`}>
+                            className={`text-6xl font-bold font-mono tracking-tighter ${isFocusing ? "text-primary text-glow glitch-text" : "text-white"}`}>
                             {formatTime(timeLeft)}
                         </span>
+                        {isFocusing && (
+                            <span className="text-xxxs text-primary/50 mt-1 animate-pulse">
+                                SYSTEM_LOCKED
+                            </span>
+                        )}
                     </div>
                 </div>
 
@@ -177,6 +195,13 @@ export default function Focus() {
                     <p className="text-center text-xxxs mt-4 text-text-dim opacity-50 font-mono">
                         {isFocusing ? "FOCUS LINK ESTABLISHED" : "LONG PRESS TO ESTABLISH LINK"}
                     </p>
+
+                    {/* Fake System Monitor (Decorative) */}
+                    <div className="mt-8 grid grid-cols-3 gap-1 opacity-30 pointer-events-none">
+                        <div className="h-1 bg-white/50 rounded-full animate-pulse"/>
+                        <div className="h-1 bg-white/20 rounded-full"/>
+                        <div className="h-1 bg-white/30 rounded-full"/>
+                    </div>
                 </div>
             </main>
 

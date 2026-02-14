@@ -7,7 +7,7 @@ import {zones} from "../data/zones";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import LayoutEffects from "../components/layout/LayoutEffects";
-import {Button} from "../components/ui/Button";
+
 
 export default function Atlas() {
     useEffect(() => {
@@ -67,12 +67,7 @@ export default function Atlas() {
                         );
                     }))}
                 </div>
-                <div className="fixed bottom-24 right-4 z-40">
-                    <Button className="rounded-full px-4 py-3 h-auto shadow-[0_0_20px_rgba(255,0,85,0.3)]">
-                        <span className="font-icon">terminal</span>
-                        <span className="text-sm font-bold tracking-tight pr-1">商户模拟 [调试模式]</span>
-                    </Button>
-                </div>
+
             </main>
             <BottomNav activeKey="atlas"/>
         </div>
