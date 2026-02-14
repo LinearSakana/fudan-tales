@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import BilingualText from './ui/BilingualText';
+import {Button} from './ui/button';
 
 export default function EngramModal({engram, onClose}) {
     const [isVisible, setIsVisible] = useState(false);
@@ -65,9 +66,9 @@ export default function EngramModal({engram, onClose}) {
                             ARCHIVE_ENTRY // {engram.id}
                         </span>
                     </div>
-                    <button onClick={handleClose} className="text-primary hover:text-white transition-colors">
+                    <Button variant="ghost" size="icon" onClick={handleClose} className="text-primary hover:text-white">
                         <span className="font-icon">close</span>
-                    </button>
+                    </Button>
                 </div>
 
                 {/* 内容区域 */}
@@ -110,19 +111,20 @@ export default function EngramModal({engram, onClose}) {
 
                     {/* 底部操作区 */}
                     <div className="pt-4 mt-2 border-t border-dashed border-white/10 flex gap-8">
-                        <button
-                            className="btn-base btn-primary flex-1 py-3 group"
+                        <Button
+                            className="flex-1 py-3 h-auto group"
                             onClick={handleDeepDive}
                         >
                             <span className="font-icon text-sm">manage_search</span>
                             FULL DECRYPTION
-                        </button>
+                        </Button>
 
-                        <button
-                            className="btn-base btn-secondary px-4 py-3"
+                        <Button
+                            variant="secondary"
+                            className="px-4 py-3 h-auto"
                         >
                             <span className="font-icon">share</span>
-                        </button>
+                        </Button>
                     </div>
                 </div>
 

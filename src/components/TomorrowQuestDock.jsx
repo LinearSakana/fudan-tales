@@ -1,4 +1,8 @@
 import BilingualText from "./ui/BilingualText";
+import {Badge, badgeVariants} from "./ui/badge";
+import {Button} from "./ui/button";
+import {cn} from "@/lib/utils";
+import {Card} from "./ui/card";
 
 export default function TomorrowQuestDock({
                                               quests,
@@ -8,16 +12,17 @@ export default function TomorrowQuestDock({
                                               onToggleLock,
                                           }) {
     return (
-        <section className="glass-card rounded-xl border border-white/10 p-4 bg-black/35">
+        <Card hud={'hover'} className="rounded-l border-white/10 bg-black/40 backdrop-blur-md p-4">
             <div className="flex items-center justify-between gap-3 mb-3">
                 <BilingualText cn="明日预演卡槽" en="TOMORROW_QUEST_DOCK" className="text-xs font-bold"/>
                 <button
                     type="button"
                     onClick={onToggleLock}
-                    className={[
-                        "badge px-2.5 py-1 transition-colors",
-                        isLocked ? "badge-warning" : "badge-muted hover:border-primary/30 hover:text-primary",
-                    ].join(" ")}
+                    className={cn(
+                        badgeVariants({variant: isLocked ? "warning" : "secondary"}),
+                        "px-2.5 py-1 transition-colors cursor-pointer",
+                        !isLocked && "hover:border-primary/30 hover:text-primary"
+                    )}
                 >
                     {isLocked ? "LOCKED" : "UNLOCKED"}
                 </button>
@@ -30,7 +35,7 @@ export default function TomorrowQuestDock({
                         type="button"
                         onClick={() => onToggleQuest(quest.id)}
                         className={[
-                            "w-full text-left card-base p-3 transition-colors",
+                            "w-full text-left rounded-lg border p-3 transition-colors",
                             quest.done ? "border-primary/45 bg-primary/10" : "border-white/10 bg-black/40 hover:bg-white/5",
                         ].join(" ")}
                     >
@@ -45,11 +50,10 @@ export default function TomorrowQuestDock({
                             </span>
                             <div className="min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
-                                    <span className="badge badge-muted">SLOT_{index + 1}</span>
-                                    <span
-                                        className={["badge", quest.kind === "random" ? "badge-warning" : "badge-primary"].join(" ")}>
+                                    <Badge variant="secondary">SLOT_{index + 1}</Badge>
+                                    <Badge variant={quest.kind === "random" ? "warning" : "default"}>
                                         {quest.kind === "random" ? "RANDOM" : "FIXED"}
-                                    </span>
+                                    </Badge>
                                 </div>
                                 <p className="text-sm font-bold leading-tight text-white truncate">{quest.title}</p>
                                 <p className="text-[10px] text-text-dim mt-1 truncate">{quest.subtitle}</p>
@@ -61,19 +65,20 @@ export default function TomorrowQuestDock({
 
             <div className="mt-4 pt-3 border-t border-white/10 flex justify-between items-center">
                 <span className="text-[9px] tracking-widest text-text-dim">2 FIXED + 1 RANDOM</span>
-                <button
-                    type="button"
+                <Button
+                    variant="secondary"
+                    size="sm"
                     disabled={isLocked}
                     onClick={onRegenerateRandom}
-                    className={[
-                        "btn-base text-[10px] px-3 py-1.5 rounded-lg",
-                        isLocked ? "opacity-40 cursor-not-allowed border border-white/10 text-text-dim" : "btn-secondary",
-                    ].join(" ")}
+                    className={cn(
+                        "text-[10px] px-3 py-1.5 h-auto",
+                        isLocked && "opacity-40 cursor-not-allowed"
+                    )}
                 >
                     <span className="font-icon text-sm">cycle</span>
                     <span>REFRESH_RANDOM</span>
-                </button>
+                </Button>
             </div>
-        </section>
+        </Card>
     );
 }

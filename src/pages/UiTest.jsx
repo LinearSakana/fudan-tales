@@ -1,4 +1,6 @@
 import {useState} from "react";
+import {Button} from "@/components/ui/button";
+import {Card} from "@/components/ui/card";
 import {
     Dialog,
     DialogClose,
@@ -23,7 +25,7 @@ export default function UiTest() {
                 </p>
             </div>
 
-            <div className="card-base card-dark p-4">
+            <Card className="p-4 bg-card">
                 <p className="mb-4 text-xs text-muted-foreground">
                     打开次数：{openCount}，确认次数：{confirmCount}
                 </p>
@@ -34,9 +36,9 @@ export default function UiTest() {
                     }}
                 >
                     <DialogTrigger asChild>
-                        <button className="btn-base btn-primary h-10 px-4">
+                        <Button className="h-10 px-4">
                             打开 Dialog
-                        </button>
+                        </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -47,20 +49,20 @@ export default function UiTest() {
                         </DialogHeader>
                         <DialogFooter>
                             <DialogClose asChild>
-                                <button className="btn-base btn-ghost h-9 px-3">取消</button>
+                                <Button variant="ghost" className="h-9 px-3">取消</Button>
                             </DialogClose>
                             <DialogClose asChild>
-                                <button
-                                    className="btn-base btn-primary h-9 px-3"
+                                <Button
+                                    className="h-9 px-3"
                                     onClick={() => setConfirmCount((prev) => prev + 1)}
                                 >
                                     确认同步
-                                </button>
+                                </Button>
                             </DialogClose>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
-            </div>
+            </Card>
         </div>
     );
 }

@@ -4,6 +4,10 @@ import BilingualText from "../components/ui/BilingualText";
 import ToggleItem from "../components/ui/ToggleItem";
 import ActionButton from "../components/ui/ActionButton";
 import Header from "../components/ui/Header";
+import {Slider} from "../components/ui/slider";
+import {Button} from "../components/ui/button";
+import {Card, CardContent} from "../components/ui/card";
+import {Separator} from "../components/ui/separator";
 import {currentUser} from "../data/user-data";
 
 export default function Settings() {
@@ -42,7 +46,7 @@ export default function Settings() {
                 <section>
                     <SectionHeader cn="显示接口" en="VISOR_DISPLAY" icon="visibility"/>
 
-                    <div className="card-base card-glass p-4 space-y-5">
+                    <Card className="p-4 space-y-5">
                         <ToggleItem
                             label="HUD_SCANLINES"
                             desc="视觉皮层扫描线特效"
@@ -54,22 +58,20 @@ export default function Settings() {
                                 <span>RETINA_BRIGHTNESS</span>
                                 <span>{config.brightness}%</span>
                             </div>
-                            <input
-                                type="range"
-                                min="0" max="100"
-                                value={config.brightness}
-                                onChange={(e) => setConfig({...config, brightness: e.target.value})}
-                                className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:rounded-full"
+                            <Slider
+                                min={0} max={100} step={1}
+                                value={[config.brightness]}
+                                onValueChange={([val]) => setConfig({...config, brightness: val})}
                             />
                         </div>
-                    </div>
+                    </Card>
                 </section>
 
                 {/* --- Section 2: Neural Link --- */}
                 <section>
                     <SectionHeader cn="神经链接" en="NEURAL_LINK" icon="settings_input_antenna"/>
 
-                    <div className="card-base card-dark p-4 space-y-5">
+                    <Card className="bg-card/60 p-4 space-y-5">
                         <ToggleItem
                             label="HAPTIC_FEEDBACK"
                             desc="操作时触发突触反馈"
@@ -82,14 +84,14 @@ export default function Settings() {
                             active={config.autoSync}
                             onClick={() => toggleConfig('autoSync')}
                         />
-                    </div>
+                    </Card>
                 </section>
 
                 {/* --- Section 3: Privacy & Protocol --- */}
                 <section>
                     <SectionHeader cn="安全协议" en="SECURITY_PROTOCOL" icon="security"/>
 
-                    <div className="card-base card-dark p-4 space-y-4">
+                    <Card className="bg-card/60 p-4 space-y-4">
                         <ToggleItem
                             label={
                                 <BilingualText cn={"深色模式"} en={"STEALTH-MODE"} className="text-xs font-bold"/>
@@ -100,24 +102,27 @@ export default function Settings() {
                             color="cyan"
                         />
 
-                        <div className="pt-4 border-t border-dashed border-white/10 grid grid-cols-2 gap-3">
+                        <Separator className="border-dashed"/>
+
+                        <div className="grid grid-cols-2 gap-3">
                             <ActionButton label="清除本地缓存" sub="PURGE CACHE" icon="delete_sweep" iconSize="text-6xl"
                                           iconPosition="-top-0 -right-0"/>
                             <ActionButton label="神经校准" sub="RE-CALIBRATE" icon="tune" iconSize="text-6xl"
                                           iconPosition="-top-0 -right-0"/>
                         </div>
-                    </div>
+                    </Card>
                 </section>
 
                 {/* --- Danger Zone --- */}
-                <button
-                    className="w-full group relative overflow-hidden btn-base border border-red-900/50 bg-red-900/10 hover:bg-red-900/30 text-red-500 py-3 mt-8">
+                <Button
+                    variant="destructive"
+                    className="w-full group relative overflow-hidden border border-red-900/50 bg-red-900/10 hover:bg-red-900/30 text-red-500 py-3 mt-8 h-auto rounded-md">
                     <div className="absolute inset-0 bg-scanlines opacity-10 pointer-events-none"/>
                     <span className="relative z-10 flex items-center justify-center gap-2 font-bold tracking-widest">
                         <span className="font-icon">power_settings_new</span>
                         SEVER_CONNECTION
                      </span>
-                </button>
+                </Button>
                 <p className="text-center text-nano text-white/10 font-mono mt-2">v.2.0.45-BETA // FUDAN_TALES</p>
 
             </main>

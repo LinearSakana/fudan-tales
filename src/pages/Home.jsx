@@ -58,6 +58,8 @@ function buildInitialQuests() {
     return [...fixedQuests, createRandomQuest()];
 }
 
+import {Card} from "../components/ui/card";
+
 export default function Home() {
     const navigate = useNavigate();
 
@@ -172,15 +174,16 @@ export default function Home() {
                         </span>
                     </div>
                 </div>
-                <div className="glass-card p-2 rounded flex flex-col items-center justify-center w-12 h-12">
+                <Card
+                    className="p-2 rounded flex flex-col items-center justify-center w-12 h-12 bg-card/80 backdrop-blur-sm border-white/10">
                     <span className="font-icon text-xl text-teal-400">cloud</span>
                     <span className="text-[9px] font-bold">24°C</span>
-                </div>
+                </Card>
             </header>
 
-            <main className="px-5 pb-32 pt-2 relative z-10">
+            <main className="px-5 pb-32 pt-6 relative z-10 space-y-8">
                 <section
-                    className={`transition-all duration-700 delay-100 ${booted ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                    className={`transition-all duration-700 ease-out ${booted ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
                     <CircadianDial progress={syncProgress} onSync={handleSync}/>
 
                     <div className="text-center -mt-4 mb-6">
@@ -203,7 +206,10 @@ export default function Home() {
                                 icon={action.icon}
                                 label={action.label}
                                 sub={action.sub}
-                                onClick={() => action.sub === "ATLAS" && navigate("/atlas")}
+                                onClick={() => {
+                                    if (action.sub === "ATLAS") navigate("/atlas");
+                                    // Add vibrations or sound effects here if possible
+                                }}
                                 disabled={idx === 2}
                             />
                         ))}

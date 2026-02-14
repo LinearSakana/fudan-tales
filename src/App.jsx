@@ -4,7 +4,8 @@ import {Navigate, Route, Routes} from 'react-router-dom'
 import Atlas from "./pages/Atlas"
 import AtlasDetail from "./pages/AtlasDetail"
 import Profile from "./pages/Profile"
-import SleepMonitor from "./pages/SleepMonitor"
+import Sleep from "./pages/Sleep"
+import SleepData from "./pages/SleepData"
 import Settings from "./pages/Settings.jsx";
 import Home from "./pages/Home.jsx";
 import UiTest from "./pages/UiTest.jsx";
@@ -26,7 +27,8 @@ export default function App() {
                 <Route path="/" element={<Navigate to="/home" replace/>}/>
                 <Route path="/atlas" element={<Atlas/>}/>
                 <Route path="/atlas/:code" element={<AtlasDetail/>}/>
-                <Route path="/sleep" element={<SleepMonitor/>}/>
+                <Route path="/sleep" element={<Sleep/>}/>
+                <Route path="/sleep/data" element={<SleepData/>}/>
                 <Route path="/me" element={<Profile/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/home" element={<Home/>}/>

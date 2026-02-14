@@ -6,6 +6,9 @@ import EngramModal from "../components/EngramModal";
 import BilingualText from "../components/ui/BilingualText";
 import {currentUser, engrams, syncLog} from "../data/user-data.js";
 import LayoutEffects from "../components/layout/LayoutEffects";
+import {Card} from "../components/ui/card";
+import {Badge} from "../components/ui/badge";
+import {Progress} from "../components/ui/progress";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -58,7 +61,8 @@ export default function Profile() {
             {/* --- Header: ID CARD --- */}
             <header
                 className={`relative z-10 p-5 pt-8 transition-all duration-300 ${booted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
-                <div className="glass-card rounded-xl p-5 border-l-4 border-l-primary overflow-hidden relative group">
+                <Card
+                    className="rounded-xl p-5 border-l-4 border-l-primary overflow-hidden relative group bg-black/40 backdrop-blur-md border-white/10">
                     {/* 装饰大字背景 */}
                     <div
                         className="absolute -top-4 -right-4 text-9xl opacity-10 font-black font-extra tracking-tighter pointer-events-none select-none">
@@ -93,8 +97,8 @@ export default function Profile() {
                                 <p className="text-xxs text-text-dim">{currentUser.department}</p>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
-                                        <span className="badge badge-muted">Lv.{currentUser.level}</span>
-                                        <span className="badge badge-primary">CLASS-B</span>
+                                        <Badge variant="secondary">Lv.{currentUser.level}</Badge>
+                                        <Badge>CLASS-B</Badge>
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +112,13 @@ export default function Profile() {
                             <span
                                 className={currentUser.sanity < 50 ? "text-red-500" : "text-teal-400"}>{currentUser.sanity}%</span>
                         </div>
-                        <div className="progress-track progress-track-md bg-black/50 border border-white/10">
-                            <div
-                                className="progress-bar progress-bar-glow bg-gradient-to-r from-primary-dark to-primary"
-                                style={{width: `${currentUser.sanity}%`, transition: 'width 1s ease-out'}}
-                            />
-                        </div>
+                        <Progress
+                            value={currentUser.sanity}
+                            className="h-3 bg-black/50 border border-white/10"
+                            indicatorClassName="bg-gradient-to-r from-primary-dark to-primary shadow-[0_0_10px_rgba(255,0,85,0.5)]"
+                        />
                     </div>
-                </div>
+                </Card>
             </header>
 
             <main className="relative z-10 flex-1 overflow-y-auto px-5 pb-32 space-y-6 scroll-smooth">
@@ -129,8 +132,9 @@ export default function Profile() {
                             {en: "SYNC LATENCY", cn: "延迟", data: currentUser.stats.latency},
                             {en: "REM COHERENCE", cn: "REM 一致度", data: currentUser.stats.coherence},
                         ].map((item, i) => (
-                            <div key={i}
-                                 className="glass-card relative p-3 rounded border border-white/5 flex flex-col justify-between overflow-hidden card-hover-glow group">
+                            <Card key={i}
+                                  hud="hover"
+                                  className="relative p-3 rounded border border-white/10 bg-black/40 backdrop-blur-sm flex flex-col justify-between overflow-hidden card-hover-glow group">
                                 <div className="absolute inset-0 effect-scanlines-soft"/>
                                 <div
                                     className="relative z-10 text-xxs text-text-dim font-bold tracking-wider flex flex-col leading-tight">
@@ -140,15 +144,14 @@ export default function Profile() {
                                 <div className="relative z-10 flex justify-between items-end mt-2">
                                     <span
                                         className={`text-lg font-mono font-bold ${item.data.status === 'warn' ? 'text-yellow-400' : 'text-white'}`}>
-                                      {item.data.val}
+                                        {item.data.val}
                                     </span>
                                     <span
                                         className={`text-nano px-1 rounded ${item.data.status === 'opt' ? 'text-teal-400 bg-teal-400/10' : 'text-text-dim bg-white/5'}`}>
-                                      {item.data.trend}
+                                        {item.data.trend}
                                     </span>
                                 </div>
-                                <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-white/20"/>
-                            </div>
+                            </Card>
                         ))}
                     </div>
                 </section>
@@ -163,8 +166,9 @@ export default function Profile() {
                         <span className="text-xxxs text-text-dim">TOTAL: {currentUser.totalSyncHours}h</span>
                     </div>
 
-                    <div
-                        className="glass-card relative p-4 rounded-xl border border-white/5 bg-black/40 overflow-hidden">
+                    <Card
+                        hud={true}
+                        className="relative p-4 rounded-xl border-white/5 bg-black/40 overflow-hidden">
                         <div className="absolute inset-0 effect-scanlines-soft opacity-20"/>
                         <div className="relative z-10 flex justify-between items-end h-36 gap-2">
                             {syncLog.map((log, idx) => {
@@ -210,7 +214,7 @@ export default function Profile() {
                                 <span className="text-text-dim w-full text-center tracking-widest animate-pulse">Select a time fragment...</span>
                             )}
                         </div>
-                    </div>
+                    </Card>
                 </section>
 
                 {/* --- Section 3: Engrams (Refactored) --- */}

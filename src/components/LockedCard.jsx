@@ -1,6 +1,9 @@
+import {Card} from "./ui/card";
+import {Skeleton} from "./ui/skeleton";
+
 export default function LockedCard({requiredLevel = 5, coverUrl}) {
     return (
-        <div className="glass-card rounded-lg overflow-hidden relative border-white/5">
+        <Card className="overflow-hidden relative border-white/5">
             <div
                 className="absolute inset-0 flex flex-col items-center justify-center z-20 bg-black/40 backdrop-blur-[2px]">
                 <div
@@ -17,8 +20,8 @@ export default function LockedCard({requiredLevel = 5, coverUrl}) {
 
             <div className="absolute bottom-0 left-0 w-full p-3 z-10 opacity-30">
                 <p className="text-[10px] text-white font-mono mb-0.5">SCP-FD-???</p>
-                <div className="h-3 w-2/3 bg-white/20 rounded-sm"/>
+                <Skeleton className="h-3 w-2/3"/>
             </div>
-        </div>
+        </Card>
     );
 }

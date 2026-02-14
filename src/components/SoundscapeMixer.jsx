@@ -1,6 +1,11 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import BilingualText from "./ui/BilingualText";
 import {createWebAudioEngine} from "./audio/web-audio-engine";
+import {Button} from "./ui/button";
+import {badgeVariants} from "./ui/badge";
+import {Slider} from "./ui/slider";
+import {cn} from "@/lib/utils";
+import {Card} from "./ui/card";
 
 export default function SoundscapeMixer({
                                             presets,
@@ -49,27 +54,25 @@ export default function SoundscapeMixer({
     };
 
     return (
-        <section className="glass-card rounded-xl border border-white/10 p-4 bg-black/35">
+        <Card hud={'hover'} className="rounded-l border-white/10 bg-black/40 backdrop-blur-md p-4">
             <div className="flex items-start justify-between gap-3 mb-3">
                 <BilingualText cn="声景调谐台" en="SOUNDSCAPE_MIXER" className="text-xs font-bold"/>
-                <button
-                    type="button"
+                <Button
+                    variant={isPreviewing ? "default" : "secondary"}
+                    size="sm"
                     onClick={handleTogglePreview}
-                    className={[
-                        "btn-base px-3 py-1.5 rounded-lg text-[10px]",
-                        isPreviewing ? "btn-primary" : "btn-secondary",
-                    ].join(" ")}
+                    className="px-3 py-1.5 text-[10px] h-auto"
                 >
                     <span className="font-icon text-sm">{isPreviewing ? "stop_circle" : "play_circle"}</span>
                     <span>{isPreviewing ? "STOP_PREVIEW" : "PLAY_PREVIEW"}</span>
-                </button>
+                </Button>
             </div>
 
             <p className="text-[10px] text-text-dim mb-3 leading-relaxed">
                 {activePreset?.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-3 mb-4">
                 {presets.map((preset) => {
                     const selected = preset.id === activePresetId;
                     return (
@@ -77,10 +80,11 @@ export default function SoundscapeMixer({
                             key={preset.id}
                             type="button"
                             onClick={() => onPresetChange(preset.id)}
-                            className={[
-                                "badge transition-colors px-2.5 py-1",
-                                selected ? "badge-primary" : "badge-muted hover:border-primary/30 hover:text-primary",
-                            ].join(" ")}
+                            className={cn(
+                                badgeVariants({variant: selected ? "default" : "secondary"}),
+                                "transition-colors px-2.5 py-1 cursor-pointer",
+                                !selected && "hover:border-primary/30 hover:text-primary"
+                            )}
                         >
                             {preset.name}
                         </button>
@@ -95,14 +99,12 @@ export default function SoundscapeMixer({
                             <span className="text-white/85 tracking-wide">{channel.label}</span>
                             <span className="font-mono text-text-dim">{levels[channel.id]}%</span>
                         </div>
-                        <input
-                            type="range"
+                        <Slider
                             min={channel.min}
                             max={channel.max}
                             step={channel.step}
-                            value={levels[channel.id]}
-                            onChange={(event) => handleLevelChange(channel.id, event.target.value)}
-                            className="cyber-range"
+                            value={[levels[channel.id]]}
+                            onValueChange={([val]) => handleLevelChange(channel.id, val)}
                         />
                     </div>
                 ))}
@@ -115,6 +117,6 @@ export default function SoundscapeMixer({
                     {isPreviewing ? "LIVE_MONITORING" : "STANDBY"}
                 </span>
             </div>
-        </section>
+        </Card>
     );
 }

@@ -5,6 +5,8 @@ import {useEffect, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import LayoutEffects from "../components/layout/LayoutEffects";
 import Header from "../components/ui/Header";
+import {Progress} from "../components/ui/progress";
+import {Button} from "../components/ui/button";
 
 
 function clamp01(x) {
@@ -45,13 +47,13 @@ export default function AtlasDetail() {
         return (
             <div className="min-h-screen bg-background-dark text-white">
                 <div className="max-w-md mx-auto p-4">
-                    <button
-                        type="button"
+                    <Button
+                        variant="link"
                         onClick={() => navigate("/atlas")}
-                        className="text-primary font-bold"
+                        className="text-primary font-bold p-0 h-auto"
                     >
                         返回图鉴
-                    </button>
+                    </Button>
                     <div className="mt-6 text-text-dim text-sm">条目不存在或未收录</div>
                 </div>
             </div>
@@ -98,12 +100,11 @@ export default function AtlasDetail() {
                             <p className="text-white text-sm font-medium tracking-widest uppercase">解密进度</p>
                             <p className="text-primary font-mono text-xs animate-pulse">{pct}% COMPLETED</p>
                         </div>
-                        <div className="progress-track progress-track-md bg-[#361721]">
-                            <div
-                                className="progress-bar progress-bar-glow"
-                                style={{width: `${pct}%`}}
-                            />
-                        </div>
+                        <Progress
+                            value={pct}
+                            className="h-3 bg-[#361721]"
+                            indicatorClassName="bg-primary shadow-[0_0_10px_rgba(255,0,85,0.5)]"
+                        />
                         <p className="text-[#ce8da3] text-xs font-mono uppercase mt-1">
                             &gt; {detail.decrypt.hint}
                         </p>

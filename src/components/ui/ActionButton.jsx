@@ -1,3 +1,9 @@
+import {Button} from "@/components/ui/button";
+
+/**
+ * 动作按钮组件 — 包装 shadcn/ui Button
+ * 带有装饰性大图标背景的功能卡片按钮，用于快捷指令等场景
+ */
 export default function ActionButton({
                                          label,
                                          sub,
@@ -8,7 +14,8 @@ export default function ActionButton({
                                          iconPosition = "-top-2 -right-2",
                                      }) {
     return (
-        <button
+        <Button
+            variant="ghost"
             onClick={onClick}
             disabled={disabled}
             className={`
@@ -16,7 +23,8 @@ export default function ActionButton({
                 border bg-black/40 backdrop-blur-md rounded-lg transition-all duration-300 group overflow-hidden
                 ${disabled
                 ? 'border-white/5 opacity-50 cursor-not-allowed'
-                : 'border-white/10 hover:border-primary/50 hover:bg-white/5 active:scale-95 cursor-pointer'}`}>
+                : 'border-white/10 hover:border-primary/50 hover:bg-white/5 active:scale-95 cursor-pointer'}`}
+        >
             {/* 装饰背景 (右漂浮大图标) */}
             <div
                 className={`absolute ${iconPosition} opacity-20 group-hover:opacity-80 transition-opacity pointer-events-none`}>
@@ -41,15 +49,15 @@ export default function ActionButton({
                 </span>
             </div>
 
-            {/* 选中态角落光标 (你的最爱) */}
+            {/* 选中态角落光标 */}
             {!disabled && (
                 <>
                     <div
-                        className="absolute bottom-1.5 right-2 w-2 h-2 border-b border-r border-primary opacity-0 group-hover:opacity-100 transition-all duration-300"/>
+                        className="absolute bottom-1.5 right-2 w-2 h-2 border-b border-r border-primary opacity-0 group-hover:opacity-60 transition-all duration-300"/>
                     <div
-                        className="absolute top-1.5 left-2 w-2 h-2 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-all duration-300"/>
+                        className="absolute top-1.5 left-2 w-2 h-2 border-t border-l border-primary opacity-0 group-hover:opacity-60 transition-all duration-300"/>
                 </>
             )}
-        </button>
-    )
+        </Button>
+    );
 }

@@ -43,16 +43,6 @@
 - If you introduce JS tests, use `*.test.jsx` naming and place them next to the related module or under
   `src/__tests__/`.
 
-## Commit & Pull Request Guidelines
-
-- Follow Conventional Commit style used in history: `feat: ...`, `fix: ...`, `refactor: ...`.
-- Keep commits scoped to a single change area (for example, one page/component family).
-- PRs should include:
-- A short summary of behavior changes.
-- Linked issue/ticket (if available).
-- Screenshots or screen recordings for UI updates.
-- Verification notes (commands run, platforms checked).
-
 ---
 
 关于项目其他参考文档，请查看 `docs/` 目录中的相关文件。

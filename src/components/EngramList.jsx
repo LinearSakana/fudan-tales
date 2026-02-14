@@ -1,4 +1,6 @@
 import React from 'react';
+import {Badge} from './ui/badge';
+import {Progress} from './ui/progress';
 
 // 辅助函数：获取稀有度样式
 const getRarityStyles = (rarity) => {
@@ -27,10 +29,10 @@ export default function EngramList({engrams, onSelect}) {
                         key={engram.id}
                         onClick={() => !isLocked && !isParsing && onSelect(engram)}
                         disabled={isLocked || isParsing}
-                        className={`relative text-left card-base rounded-xl p-3 flex flex-col gap-2 
+                        className={`relative text-left rounded-xl border p-3 flex flex-col gap-2 
                             ${isLocked
                             ? "border-white/5 bg-transparent blur-cipher cursor-not-allowed"
-                            : `card-glass card-interactive ${styles} cursor-pointer group`
+                            : `bg-black/40 backdrop-blur-sm hover:bg-white/5 border-white/10 ${styles} cursor-pointer group`
                         }
                         `}
                     >
@@ -40,9 +42,9 @@ export default function EngramList({engrams, onSelect}) {
                                 {isLocked ? 'lock' : engram.icon}
                             </span>
                             {!isLocked && (
-                                <span className="badge badge-muted opacity-70">
+                                <Badge variant="secondary" className="opacity-70">
                                     {engram.rarity}
-                                </span>
+                                </Badge>
                             )}
                         </div>
 
@@ -57,10 +59,11 @@ export default function EngramList({engrams, onSelect}) {
                                         <span>解析中...</span>
                                         <span>{engram.progress}%</span>
                                     </div>
-                                    <div className="progress-track progress-track-sm">
-                                        <div className="progress-bar animate-pulse"
-                                             style={{width: `${engram.progress}%`}}/>
-                                    </div>
+                                    <Progress
+                                        value={engram.progress}
+                                        className="h-1"
+                                        indicatorClassName="animate-pulse"
+                                    />
                                 </div>
                             ) : (
                                 <p className="text-xxxs text-text-dim leading-tight h-8 overflow-hidden line-clamp-2">
