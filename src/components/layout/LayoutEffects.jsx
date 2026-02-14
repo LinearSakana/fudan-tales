@@ -15,8 +15,6 @@ export default function LayoutEffects({
                     {/* 呼吸效果背景 */}
                     <div
                         className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,85,0.05)_0%,transparent_70%)]"></div>
-                    {/*<div*/}
-                    {/*    className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,0,85,0.05)_10px,rgba(255,0,85,0.05)_20px)]"></div>*/}
                     <div
                         className="absolute inset-0 effect-scanlines"></div>
                     {/* 模糊效果 */}

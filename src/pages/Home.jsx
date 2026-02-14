@@ -9,6 +9,7 @@ import BroadcastTicker from "../components/BroadcastTicker";
 import CircadianDial from "../components/CircadianDial";
 import SoundscapeMixer from "../components/SoundscapeMixer";
 import TomorrowQuestDock from "../components/TomorrowQuestDock";
+import {Card} from "../components/ui/Card";
 import {
     broadcastMessages,
     fixedQuestTemplates,
@@ -57,8 +58,6 @@ function buildInitialQuests() {
 
     return [...fixedQuests, createRandomQuest()];
 }
-
-import {Card} from "../components/ui/card";
 
 export default function Home() {
     const navigate = useNavigate();

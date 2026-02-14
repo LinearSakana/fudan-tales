@@ -5,14 +5,16 @@ import {useEffect, useMemo} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import LayoutEffects from "../components/layout/LayoutEffects";
 import Header from "../components/ui/Header";
-import {Progress} from "../components/ui/progress";
-import {Button} from "../components/ui/button";
+import {Progress} from "../components/ui/Progress";
+import {Button} from "../components/ui/Button";
 
 
+/** 将数值限制在 [0, 1] 范围内 */
 function clamp01(x) {
     return Math.max(0, Math.min(1, x));
 }
 
+/** 从条目代号中推导出档案编号，如 "SCP-FD-082" → "档案编号 082" */
 function deriveArchiveNo(code) {
     // 暂时用 code 的后缀展示
     // SCP-FD-082 -> 档案编号 082
@@ -29,16 +31,7 @@ export default function AtlasDetail() {
         [code]
     );
 
-    const raw = detailsByCode[entity.code] || {};
-    const detail = {
-        ...defaultDetail,
-        ...raw,
-        decrypt: {...defaultDetail.decrypt, ...(raw.decrypt || {})},
-        photo: {...defaultDetail.photo, ...(raw.photo || {})},
-        supply: {...defaultDetail.supply, ...(raw.supply || {})},
-    };
-
-
+    // 如果没有匹配的条目，提前返回 fallback 页面
     useEffect(() => {
         document.title = entity ? `${entity.title} · 异闻图鉴` : "未找到 · 异闻图鉴";
     }, [entity]);
@@ -59,6 +52,16 @@ export default function AtlasDetail() {
             </div>
         );
     }
+
+    // 合并详情数据：以 detailsByCode 中的配置覆盖默认值
+    const raw = detailsByCode[entity.code] || {};
+    const detail = {
+        ...defaultDetail,
+        ...raw,
+        decrypt: {...defaultDetail.decrypt, ...(raw.decrypt || {})},
+        photo: {...defaultDetail.photo, ...(raw.photo || {})},
+        supply: {...defaultDetail.supply, ...(raw.supply || {})},
+    };
 
     const pct = Math.round(clamp01(entity.progress) * 100);
     const archiveNo = detail.archiveNo || deriveArchiveNo(entity.code);

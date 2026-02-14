@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {Button} from "@/components/ui/button";
-import {Card} from "@/components/ui/card";
+import {Button} from "@/components/ui/Button";
+import {Card} from "@/components/ui/Card";
 import {
     Dialog,
     DialogClose,
@@ -10,7 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 
 export default function UiTest() {
     const [openCount, setOpenCount] = useState(0);

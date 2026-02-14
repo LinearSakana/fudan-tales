@@ -172,16 +172,7 @@
         @apply text-[10px] text-text-dim font-mono tracking-widest uppercase;
     }
 
-    /* Card system (Deprecated - use shadcn/ui Card) */
-    /* .card-base, .card-glass, .card-dark, .card-interactive removed */
-    /* Badge / Label (Deprecated - use shadcn/ui Badge) */
-    /* .badge, .badge-muted, .badge-primary, .badge-warning removed */
-    /* Progress (Deprecated - use shadcn/ui Progress) */
-    /* .progress-track, .progress-bar removed */
-    /* Button system (Deprecated - use shadcn/ui Button) */
-    /* .btn-base, .btn-primary, .btn-secondary, .btn-ghost removed */
-    /* Cyberpunk Range Slider (Deprecated - use shadcn/ui Slider) */
-    /* .cyber-range removed */
+
 }
 
 @layer utilities {

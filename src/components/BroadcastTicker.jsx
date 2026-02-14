@@ -1,6 +1,10 @@
 import React from 'react';
 
-const BroadcastTicker = ({messages}) => {
+/**
+ * 全局广播滚动条组件
+ * @param {string[]} messages - 要滚动显示的广播消息列表
+ */
+export default function BroadcastTicker({messages}) {
     return (
         <div
             className="fixed bottom-8 left-0 right-0 z-20 mb-10 w-full bg-black/80 border-t border-white/10 h-8 flex items-center overflow-hidden backdrop-blur-md">
@@ -21,6 +25,4 @@ const BroadcastTicker = ({messages}) => {
             </div>
         </div>
     );
-};
-
-export default BroadcastTicker;
+}

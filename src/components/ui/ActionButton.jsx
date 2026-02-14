@@ -1,4 +1,4 @@
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 
 /**
  * 动作按钮组件 — 包装 shadcn/ui Button

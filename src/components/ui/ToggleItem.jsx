@@ -1,4 +1,4 @@
-import {Switch} from "@/components/ui/switch";
+import {Switch} from "@/components/ui/Switch";
 
 /**
  * 切换项组件 — 包装 shadcn/ui Switch

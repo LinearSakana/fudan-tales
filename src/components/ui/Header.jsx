@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Button";
 
 /**
  * 页面通用头部组件 — 包含返回按钮、标题和可选的右侧状态文本

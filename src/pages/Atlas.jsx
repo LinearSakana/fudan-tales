@@ -7,7 +7,7 @@ import {zones} from "../data/zones";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import LayoutEffects from "../components/layout/LayoutEffects";
-import {Button} from "../components/ui/button";
+import {Button} from "../components/ui/Button";
 
 export default function Atlas() {
     useEffect(() => {

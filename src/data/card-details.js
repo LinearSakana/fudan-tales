@@ -1,13 +1,8 @@
-// src/data/details.js
-// key: entity.code，例如 "SCP-FD-082"
-// {
-//   archiveNo?: string,
-//   protocol?: string,
-//   connectionText?: string,
-//   decrypt?: { hint?: string },
-//   photo?: { tag?: string, meta?: string, warning?: string, imageUrl?: string },
-//   supply?: { typeLabel?: string, title?: string, discountNum?: string, discountUnit?: string, item?: string, icon?: string }
-// }
+/**
+ * 异闻图鉴·条目详情数据
+ * key 为 entity.code（如 "SCP-FD-082"），值包含档案信息、解密提示、照片数据和补给信息。
+ * 未配置的字段会自动使用 defaultDetail 中的默认值。
+ */
 
 export const detailsByCode = {
     "SCP-FD-082": {

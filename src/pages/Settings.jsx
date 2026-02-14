@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import LayoutEffects from "../components/layout/LayoutEffects";
 import BilingualText from "../components/ui/BilingualText";
+import SectionHeader from "../components/ui/SectionHeader";
 import ToggleItem from "../components/ui/ToggleItem";
 import ActionButton from "../components/ui/ActionButton";
 import Header from "../components/ui/Header";
-import {Slider} from "../components/ui/slider";
-import {Button} from "../components/ui/button";
-import {Card, CardContent} from "../components/ui/card";
-import {Separator} from "../components/ui/separator";
+import {Slider} from "../components/ui/Slider";
+import {Button} from "../components/ui/Button";
+import {Card, CardContent} from "../components/ui/Card";
+import {Separator} from "../components/ui/Separator";
 import {currentUser} from "../data/user-data";
 
 export default function Settings() {
@@ -121,22 +122,11 @@ export default function Settings() {
                     <span className="relative z-10 flex items-center justify-center gap-2 font-bold tracking-widest">
                         <span className="font-icon">power_settings_new</span>
                         SEVER_CONNECTION
-                     </span>
+                    </span>
                 </Button>
                 <p className="text-center text-nano text-white/10 font-mono mt-2">v.2.0.45-BETA // FUDAN_TALES</p>
 
             </main>
-        </div>
-    );
-}
-
-// ------ Sub Components ------
-
-function SectionHeader({cn, en, icon}) {
-    return (
-        <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="font-icon text-primary text-sm">{icon}</span>
-            <BilingualText cn={cn} en={en} className="text-xs font-bold"/>
         </div>
     );
 }

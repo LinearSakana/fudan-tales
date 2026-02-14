@@ -1,7 +1,11 @@
 import React from 'react';
 
-// props.progress: 0-100 (每日同步进度)
-const CircadianDial = ({progress = 0, onSync = null}) => {
+/**
+ * 昼夜节律表盘组件
+ * @param {number} progress - 0-100，每日同步进度百分比
+ * @param {Function|null} onSync - 点击中心按钮时触发的同步回调
+ */
+export default function CircadianDial({progress = 0, onSync = null}) {
     return (
         <div className="relative w-56 h-56 mx-auto flex items-center justify-center my-4 group select-none">
             {/* 1. 外部刻度环 (慢速旋转) */}
@@ -51,6 +55,4 @@ const CircadianDial = ({progress = 0, onSync = null}) => {
             </div>
         </div>
     );
-};
-
-export default CircadianDial;
+}

@@ -6,9 +6,9 @@ import EngramModal from "../components/EngramModal";
 import BilingualText from "../components/ui/BilingualText";
 import {currentUser, engrams, syncLog} from "../data/user-data.js";
 import LayoutEffects from "../components/layout/LayoutEffects";
-import {Card} from "../components/ui/card";
-import {Badge} from "../components/ui/badge";
-import {Progress} from "../components/ui/progress";
+import {Card} from "../components/ui/Card";
+import {Badge} from "../components/ui/Badge";
+import {Progress} from "../components/ui/Progress";
 
 export default function Profile() {
     const navigate = useNavigate();
