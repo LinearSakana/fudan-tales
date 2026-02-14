@@ -1,34 +1,40 @@
-import {useNavigate} from "react-router-dom";
-import {Button} from "./button";
+import {useNavigate, useLocation} from "react-router-dom";
+import {Button} from "./Button";
+import {navItems} from "@/config/nav-config";
 
 export default function BottomNav({
-                                      activeKey = "home",
-                                      onNavigate = (key, navigate) => {
-                                          if (key === "home") navigate("/");
-                                          if (key === "atlas") navigate("/atlas");
-                                          if (key === "sleep") navigate("/sleep");
-                                          if (key === "me") navigate("/me");
-                                      }
+                                      activeKey,
+                                      onNavigate
                                   }) {
-    const items = [
-        {key: "home", icon: "home_app_logo", label: "首页"},
-        {key: "atlas", icon: "grid_view", label: "图鉴"},
-        {key: "sleep", icon: "bedtime", label: "睡眠"},
-        {key: "me", icon: "person", label: "个人"},
-    ];
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // 如果没有传入 activeKey，尝试从 URL 推断 (简单匹配)
+    // 实际项目中可能由父组件控制 activeKey 更稳妥
+    const currentKey = activeKey || navItems.find(item => location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)))?.key || "home";
+
+    const handleNavigate = (key) => {
+        if (onNavigate) {
+            onNavigate(key, navigate);
+            return;
+        }
+        const item = navItems.find(i => i.key === key);
+        if (item) {
+            navigate(item.path);
+        }
+    };
+
     return (
         <nav
             className="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/85 backdrop-blur-md border-t border-white/10 px-6 py-3 flex justify-between items-center pb-8 safe-area-pb text-xl">
-            {/*TODO: Fix layout issue with BottomNav and system navigation bar*/}
-            {items.map((it) => {
-                const active = it.key === activeKey;
+            {navItems.map((it) => {
+                const active = it.key === currentKey;
                 if (active) {
                     return (
                         <Button
                             key={it.key}
                             variant="ghost"
-                            onClick={() => onNavigate?.(it.key, navigate)}
+                            onClick={() => handleNavigate(it.key)}
                             className="flex flex-col items-center gap-1 text-primary relative group h-auto p-0 hover:bg-transparent"
                         >
                             {/* 顶部发光指示条 */}
@@ -45,7 +51,7 @@ export default function BottomNav({
                     <Button
                         key={it.key}
                         variant="ghost"
-                        onClick={() => onNavigate?.(it.key, navigate)}
+                        onClick={() => handleNavigate(it.key)}
                         className="flex flex-col items-center gap-1 group relative text-text-dim hover:text-white h-auto p-0 hover:bg-transparent"
                     >
                         <span className="font-icon group-hover:scale-125 transition-transform">

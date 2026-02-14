@@ -8,6 +8,7 @@ import Sleep from "./pages/Sleep"
 import SleepData from "./pages/SleepData"
 import Settings from "./pages/Settings.jsx";
 import Home from "./pages/Home.jsx";
+import Focus from "./pages/Focus.jsx";
 import UiTest from "./pages/UiTest.jsx";
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
                 <Route path="/me" element={<Profile/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/home" element={<Home/>}/>
+                <Route path="/focus" element={<Focus/>}/>
                 <Route path="/ui-test" element={<UiTest/>}/>
             </Routes>
         </div>
