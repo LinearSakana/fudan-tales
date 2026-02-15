@@ -6,6 +6,8 @@ import AtlasDetail from "./pages/AtlasDetail"
 import Profile from "./pages/Profile"
 import Sleep from "./pages/Sleep"
 import SleepData from "./pages/SleepData"
+import SleepReport from "./pages/SleepReport"
+import SleepReward from "./pages/SleepReward"
 import Settings from "./pages/Settings.jsx";
 import Home from "./pages/Home.jsx";
 import Focus from "./pages/Focus.jsx";
@@ -30,6 +32,8 @@ export default function App() {
                 <Route path="/atlas/:code" element={<AtlasDetail/>}/>
                 <Route path="/sleep" element={<Sleep/>}/>
                 <Route path="/sleep/data" element={<SleepData/>}/>
+                <Route path="/sleep/report" element={<SleepReport/>}/>
+                <Route path="/sleep/reward" element={<SleepReward/>}/>
                 <Route path="/me" element={<Profile/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/home" element={<Home/>}/>

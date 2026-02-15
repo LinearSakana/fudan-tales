@@ -331,6 +331,86 @@
     }
 }
 
+/* 3D 卡片翻转动画（用于 SleepReward 页面）*/
+.card-flip-inner {
+    position: relative;
+    width: 100%;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+}
+
+.card-flip-inner.card-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-flip-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card-flip-back {
+    position: relative;
+}
+
+.card-flip-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: rotateY(180deg);
+}
+
+/* 解密扫描线（从上到下循环扫描） */
+.decrypt-scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 0, 85, 0.6),
+            rgba(0, 255, 255, 0.4),
+            transparent
+    );
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.5), 0 0 40px rgba(0, 255, 255, 0.2);
+    animation: decrypt-scan 2s linear infinite;
+}
+
+@keyframes decrypt-scan {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* 慢脉冲动画 */
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1.4);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.6);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+}
+
 /* 自定义滚动条 (Webkit) */
 ::-webkit-scrollbar {
     width: 4px;

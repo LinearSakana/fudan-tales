@@ -1,28 +1,74 @@
-import React, { useState, useMemo } from "react";
+import React, {useState, useMemo, useEffect} from "react";
+import {useNavigate, useLocation} from "react-router-dom";
 import BottomNav from "../components/ui/BottomNav";
 import LayoutEffects from "../components/layout/LayoutEffects";
 import { Button } from "../components/ui/Button";
 import { Slider } from "../components/ui/Slider";
 import Header from "../components/ui/Header";
 
+/**
+ * 睡眠终端页面
+ * 支持状态：idle（设置参数）、sleeping（睡眠中）
+ * 流程：
+ *   idle → 点击 INITIATE SLEEP → 跳转到 /sleep/report
+ *   /sleep/report → 点击 CTA → 跳回此页 (state.enterSleep=true) → sleeping
+ *   sleeping → 点击 WAKE UP：
+ *     - 若睡眠 ≥ 30min → 跳转 /sleep/reward（档案解密）
+ *     - 否则 → 回到 idle
+ */
 export default function Sleep() {
-    const [isSleeping, setIsSleeping] = useState(false);
-    const [duration, setDuration] = useState([8]); // Default 8 hours
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // Calculate wake time
-    // Updates when duration changes. Captures "now" at the moment of interaction.
+    // 从 location.state 初始化：
+    // - enterSleep: 从报告页返回，进入睡眠模式
+    // - returnToSleep: 从奖励页返回，保持睡眠模式（避免误触）
+    const [isSleeping, setIsSleeping] = useState(
+        () => !!(location.state?.enterSleep || location.state?.returnToSleep)
+    );
+    const [duration, setDuration] = useState([8]); // 默认 8 小时
+
+    // 清除 location state，防止刷新后重新触发
+    useEffect(() => {
+        if (location.state?.enterSleep || location.state?.returnToSleep) {
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
+
+    // 计算预计唤醒时间
     const wakeTime = useMemo(() => {
         const now = new Date();
         const target = new Date(now.getTime() + duration[0] * 60 * 60 * 1000);
         return target.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }, [duration]);
 
-    // Handle sleep toggle
-    const handleSleepToggle = () => {
-        setIsSleeping(!isSleeping);
+    // 处理「入睡」按钮
+    const handleInitiateSleep = () => {
+        // 跳转到睡眠数据报告页面，报告页会设置 sleepStartTime 并跳回
+        navigate("/sleep/report");
     };
 
-    // Quick presets
+    // 处理「醒来」按钮
+    const handleWakeUp = () => {
+        setIsSleeping(false);
+
+        // 计算实际睡眠时长（注意：开发测试时时间很短，这里用 10 秒代替 30 分钟方便调试）
+        const startStr = sessionStorage.getItem("sleepStartTime");
+        if (startStr) {
+            const elapsed = Date.now() - parseInt(startStr, 10);
+            sessionStorage.removeItem("sleepStartTime");
+
+            // 阈值：30 分钟 = 1800000ms（开发阶段可改为几秒方便测试）
+            const THRESHOLD_MS = 10 * 1000; // 开发阈值：10 秒；上线后改为 30 * 60 * 1000
+            if (elapsed >= THRESHOLD_MS) {
+                navigate("/sleep/reward");
+                return;
+            }
+        }
+        // 未达到阈值，直接返回 idle 状态
+    };
+
+    // 快捷预设
     const presets = [
         { label: "NAP", val: 0.5 },
         { label: "CYCLE", val: 1.5 },
@@ -38,13 +84,13 @@ export default function Sleep() {
                 grid={!isSleeping}
             />
 
-            {/* Breathing Background Overlay for Sleep Mode */}
+            {/* 睡眠模式下的呼吸暗层 */}
             <div
                 className={`absolute inset-0 bg-black transition-opacity duration-[2000ms] ${isSleeping ? "opacity-80" : "opacity-0 pointer-events-none"}`}
                 style={{ zIndex: 5 }}
             />
 
-            {/* Header */}
+            {/* 顶栏 */}
             <div className={`transition-all duration-500 relative z-20 ${isSleeping ? "opacity-30 blur-sm" : "opacity-100"}`}>
                 <Header
                     title="睡眠终端"
@@ -57,17 +103,17 @@ export default function Sleep() {
 
             <main className="relative z-20 flex-1 flex flex-col justify-center items-center px-6 pb-24 w-full max-w-md mx-auto">
 
-                {/* Main Visual Circle */}
+                {/* 主视觉圆环 */}
                 <div className="relative mb-10 group">
-                    {/* Outer Rotating Ring */}
+                    {/* 外圈旋转虚线环 */}
                     <div className={`absolute inset-[-20px] border border-dashed border-white/10 rounded-full w-[280px] h-[280px] animate-spin-slow duration-[30s] transition-opacity ${isSleeping ? "opacity-10" : "opacity-30"}`} />
 
-                    {/* Inner Pulse Ring (Active in Sleep) */}
+                    {/* 内圈呼吸光晕（仅睡眠中显示） */}
                     {isSleeping && (
                         <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-slow scale-150" />
                     )}
 
-                    {/* Main Circle Container */}
+                    {/* 主圆容器 */}
                     <div
                         className={`relative w-60 h-60 rounded-full flex flex-col items-center justify-center border-2 bg-black/40 backdrop-blur-md transition-all duration-700
                         ${isSleeping
@@ -75,7 +121,7 @@ export default function Sleep() {
                                 : "border-white/20 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                             }`}
                     >
-                        {/* Progress SVG Ring */}
+                        {/* 进度 SVG 环 */}
                         <svg className="absolute inset-0 transform -rotate-90 w-full h-full p-2" viewBox="0 0 100 100">
                             <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
                             <circle
@@ -83,13 +129,13 @@ export default function Sleep() {
                                 stroke={isSleeping ? "#ff0055" : "#00FFFF"}
                                 strokeWidth="2"
                                 strokeDasharray="283"
-                                strokeDashoffset={283 - (283 * (duration[0] / 12))} // Max 12h for ring visual
+                                strokeDashoffset={283 - (283 * (duration[0] / 12))}
                                 strokeLinecap="round"
                                 className="transition-all duration-1000 ease-in-out"
                             />
                         </svg>
 
-                        {/* Text Content */}
+                        {/* 文字内容 */}
                         <div className="text-center z-10 space-y-1">
                             <span className={`block text-xxs tracking-[0.2em] mb-2 ${isSleeping ? "text-primary animate-pulse" : "text-text-dim"}`}>
                                 {isSleeping ? "WAKE UP TIME" : "TARGET TIME"}
@@ -106,10 +152,10 @@ export default function Sleep() {
                     </div>
                 </div>
 
-                {/* Controls Area (Fades out when sleeping) */}
+                {/* 控制区域（睡眠中隐藏） */}
                 <div className={`w-full space-y-8 transition-all duration-700 ease-out ${isSleeping ? "opacity-0 translate-y-10 pointer-events-none delay-0" : "opacity-100 translate-y-0 delay-100"}`}>
 
-                    {/* Slider Control */}
+                    {/* 滑块 */}
                     <div className="space-y-4 px-4">
                         <div className="flex justify-between items-center text-xs font-mono text-text-dim">
                             <span className="flex items-center gap-2">
@@ -135,7 +181,7 @@ export default function Sleep() {
                         </div>
                     </div>
 
-                    {/* Quick Presets */}
+                    {/* 快捷预设 */}
                     <div className="grid grid-cols-3 gap-3 px-2">
                         {presets.map((p) => (
                             <button
@@ -153,7 +199,7 @@ export default function Sleep() {
                     </div>
                 </div>
 
-                {/* Main Action Button (Always visible but changes style) */}
+                {/* 主操作按钮（常驻，根据状态变化） */}
                 <div className="absolute bottom-24 w-full px-6">
                     <Button
                         className={`w-full h-14 text-lg font-bold tracking-widest shadow-lg transition-all duration-500 overflow-hidden group relative
@@ -161,7 +207,7 @@ export default function Sleep() {
                                 ? "bg-transparent border border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
                                 : "bg-primary hover:bg-primary-dark text-white border-none"
                             }`}
-                        onClick={handleSleepToggle}
+                        onClick={isSleeping ? handleWakeUp : handleInitiateSleep}
                     >
                         {isSleeping && <div className="absolute inset-0 bg-scanlines opacity-10" />}
                         <span className="relative z-10 flex items-center justify-center gap-3">
@@ -172,7 +218,7 @@ export default function Sleep() {
                         </span>
                     </Button>
 
-                    {/* Status Text */}
+                    {/* 状态文字 */}
                     <p className={`text-center text-xxxs mt-4 font-mono transition-all duration-500 ${isSleeping ? "text-primary/70 animate-pulse" : "text-text-dim"}`}>
                         {isSleeping ? "/// NEURAL LINK ACTIVE - MONITORING ///" : "READY TO SYNCHRONIZE"}
                     </p>
