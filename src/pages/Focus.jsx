@@ -84,94 +84,97 @@ export default function Focus() {
             </div>
 
             <main
-                className="relative z-20 flex-1 flex flex-col justify-center items-center px-6 pb-24 w-full max-w-md mx-auto">
+                className="relative z-20 flex-1 flex flex-col px-6 pb-24 w-full max-w-md mx-auto">
+                <div className="flex-1 flex flex-col justify-center items-center w-full">
 
-                {/* Timer Display */}
-                <div className="relative mb-12 group">
-                    {/* 1. Outer Rotating Ring (Dashed) */}
-                    <div
-                        className={`absolute inset-[-40px] border border-dashed border-white/10 rounded-full w-[320px] h-[320px] transition-all duration-[1s] ${isFocusing ? "animate-spin-slow opacity-20 border-primary/30" : "opacity-10"}`}/>
+                    {/* Timer Display */}
+                    <div className="relative mb-12 group">
+                        {/* 1. Outer Rotating Ring (Dashed) */}
+                        <div
+                            className={`absolute inset-[-40px] border border-dashed border-white/10 rounded-full w-[320px] h-[320px] transition-all duration-[1s] ${isFocusing ? "animate-spin-slow opacity-20 border-primary/30" : "opacity-10"}`}/>
 
-                    {/* 2. Middle Ring (Ticks) */}
-                    <div
-                        className={`absolute inset-[-20px] w-[280px] h-[280px] rounded-full border border-white/5 flex items-center justify-center ${isFocusing ? "animate-pulse" : ""}`}>
-                        {Array.from({length: 12}).map((_, i) => (
-                            <div key={i} className="absolute w-full h-full" style={{transform: `rotate(${i * 30}deg)`}}>
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-white/20"/>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* 3. Progress Circle (Canvas/SVG) */}
-                    <svg className="w-60 h-60 transform -rotate-90 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
-                         viewBox="0 0 100 100">
-                        {/* Bg Circle */}
-                        <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
-                        {/* Inner Decoration Circle */}
-                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="8"/>
-
-                        {/* Progress Circle */}
-                        <circle
-                            cx="50" cy="50" r="46" fill="none"
-                            stroke={isFocusing ? "#ff0055" : "#00FFFF"}
-                            strokeWidth={isFocusing ? "2" : "1"}
-                            strokeDasharray="289"
-                            strokeDashoffset={289 - (289 * (timeLeft / (durationMinutes[0] * 60)))}
-                            className="transition-all duration-1000 ease-linear"
-                            strokeLinecap="round"
-                        />
-                    </svg>
-
-                    {/* Time Text */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span
-                            className={`text-xxxs tracking-widest mb-2 font-mono ${isFocusing ? "text-primary animate-pulse" : "text-text-dim"}`}>
-                            {isFocusing ? "/// REMAINING ///" : "DURATION"}
-                        </span>
-                        <span
-                            className={`text-6xl font-bold font-mono tracking-tighter ${isFocusing ? "text-primary text-glow glitch-text" : "text-white"}`}>
-                            {formatTime(timeLeft)}
-                        </span>
-                        {isFocusing && (
-                            <span className="text-xxxs text-primary/50 mt-1 animate-pulse">
-                                SYSTEM_LOCKED
-                            </span>
-                        )}
-                    </div>
-                </div>
-
-                {/* Controls (Hidden when focusing) */}
-                <div
-                    className={`w-full space-y-8 transition-all duration-500 ${isFocusing ? "opacity-0 translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"}`}>
-                    <div className="space-y-4 px-4">
-                        <Slider
-                            value={durationMinutes}
-                            onValueChange={setDurationMinutes}
-                            max={120}
-                            min={5}
-                            step={5}
-                            className="w-full"
-                        />
-                        <div className="grid grid-cols-3 gap-3">
-                            {presets.map((p) => (
-                                <button
-                                    key={p.label}
-                                    onClick={() => setDurationMinutes([p.val])}
-                                    className={`py-2 px-1 rounded border transition-all text-xs font-bold tracking-wider hover:bg-white/5 active:scale-95
-                                    ${durationMinutes[0] === p.val
-                                        ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(0,255,255,0.2)]"
-                                        : "border-white/10 text-text-dim"
-                                    }`}
-                                >
-                                    {p.label}
-                                </button>
+                        {/* 2. Middle Ring (Ticks) */}
+                        <div
+                            className={`absolute inset-[-20px] w-[280px] h-[280px] rounded-full border border-white/5 flex items-center justify-center ${isFocusing ? "animate-pulse" : ""}`}>
+                            {Array.from({length: 12}).map((_, i) => (
+                                <div key={i} className="absolute w-full h-full"
+                                     style={{transform: `rotate(${i * 30}deg)`}}>
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-white/20"/>
+                                </div>
                             ))}
+                        </div>
+
+                        {/* 3. Progress Circle (Canvas/SVG) */}
+                        <svg className="w-60 h-60 transform -rotate-90 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+                             viewBox="0 0 100 100">
+                            {/* Bg Circle */}
+                            <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+                            {/* Inner Decoration Circle */}
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.02)" strokeWidth="8"/>
+
+                            {/* Progress Circle */}
+                            <circle
+                                cx="50" cy="50" r="46" fill="none"
+                                stroke={isFocusing ? "#ff0055" : "#00FFFF"}
+                                strokeWidth={isFocusing ? "2" : "1"}
+                                strokeDasharray="289"
+                                strokeDashoffset={289 - (289 * (timeLeft / (durationMinutes[0] * 60)))}
+                                className="transition-all duration-1000 ease-linear"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+
+                        {/* Time Text */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span
+                                className={`text-xxxs tracking-widest mb-2 font-mono ${isFocusing ? "text-primary animate-pulse" : "text-text-dim"}`}>
+                                {isFocusing ? "/// REMAINING ///" : "DURATION"}
+                            </span>
+                            <span
+                                className={`text-6xl font-bold font-mono tracking-tighter ${isFocusing ? "text-primary text-glow glitch-text" : "text-white"}`}>
+                                {formatTime(timeLeft)}
+                            </span>
+                            {isFocusing && (
+                                <span className="text-xxxs text-primary/50 mt-1 animate-pulse">
+                                    SYSTEM_LOCKED
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Controls (Hidden when focusing) */}
+                    <div
+                        className={`w-full space-y-8 transition-all duration-500 ${isFocusing ? "opacity-0 translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"}`}>
+                        <div className="space-y-4 px-4">
+                            <Slider
+                                value={durationMinutes}
+                                onValueChange={setDurationMinutes}
+                                max={120}
+                                min={5}
+                                step={5}
+                                className="w-full"
+                            />
+                            <div className="grid grid-cols-3 gap-3">
+                                {presets.map((p) => (
+                                    <button
+                                        key={p.label}
+                                        onClick={() => setDurationMinutes([p.val])}
+                                        className={`py-2 px-1 rounded border transition-all text-xs font-bold tracking-wider hover:bg-white/5 active:scale-95
+                                    ${durationMinutes[0] === p.val
+                                            ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+                                            : "border-white/10 text-text-dim"
+                                        }`}
+                                    >
+                                        {p.label}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Action Button */}
-                <div className="absolute bottom-24 w-full px-6">
+                <div className="w-full px-6 z-30 mt-auto">
                     {!isFocusing ? (
                         <HoldToTriggerButton
                             onTrigger={handleStartFocus}
